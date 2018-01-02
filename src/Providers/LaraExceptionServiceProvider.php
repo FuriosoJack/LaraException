@@ -25,6 +25,7 @@ class LaraExceptionServiceProvider extends ServiceProvider
     {
         
     }
+    
     /**
      * Se encarga de registrar los servicio de la aplicacion
      */

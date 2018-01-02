@@ -19,7 +19,7 @@ class ExceptionFather
    
     
     /**
-     * 
+     * Se encarga de generar la excepcion
      * @param string $message
      * @param int $httpCode
      * @param bool $status
@@ -38,8 +38,11 @@ class ExceptionFather
     
     }
 
-    
-    private function renderLog($message)
+    /**
+     * Se encarga de generar el log
+     * @param string $message mensaje que aparecera en el log
+     */
+    private function renderLog(string $message)
     {
         Log::error(' **************************************** '
                 . ''
