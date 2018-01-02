@@ -26,10 +26,27 @@ add to your `composer.json`
 }
 ```
 
+Next, if using Laravel 5, include the service provider within your `config/app.php` file.
+
+```php
+'providers' => [
+    FuriosoJack\LaraException\Providers\LaraExceptionServiceProvider::class,
+];
+```
+
+Finally, add two class aliases to the aliases array of `config/app.php`:
+
+```php
+'aliases' => [
+    'LaraException' => FuriosoJack\LaraException\Facades\LaraExceptionFacade::class,
+  ],
+```
+
+
 ## Examples
 
  ```php
- LaraException::buildEJson("hola mundo",500,false);;
+ LaraException::buildEJson("hola mundo",500,false);
 ```
 
 result 
