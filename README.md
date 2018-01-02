@@ -60,6 +60,7 @@ this does not generate a log in `storage/logs/laravel.logg`
 
 ```
 result 
+
 ```json
 {"error":"hola mundo","code":500}
-
+```
