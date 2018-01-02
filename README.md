@@ -58,9 +58,8 @@ this does not generate a log in `storage/logs/laravel.logg`
  LaraException::buildEJson("hola mundo",500,false);
 ```
 
-```
-result 
 
+result 
 ```json
 {"error":"hola mundo","code":500}
 ```
