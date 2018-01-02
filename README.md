@@ -44,13 +44,14 @@ Finally, add two class aliases to the aliases array of `config/app.php`:
 
 
 ## Examples
-this does not generates a log in storage / logs / laravel.log
+
+this generates a log in `storage/logs/laravel.logg`
 
  ```php
  LaraException::buildEJson("hola mundo",500);
 ```
 
-this does not generate a log in storage / logs / laravel.log
+this does not generate a log in `storage/logs/laravel.logg`
 
  ```php
  LaraException::buildEJson("hola mundo",500,false);
