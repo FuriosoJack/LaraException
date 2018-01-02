@@ -36,7 +36,7 @@ class BasicExceptionJSON extends \Exception
     private function renderResponseJson()
     {
         $jsonResponse = [
-            'errorMessage' => $this->messageJSON,
+            'error' => $this->messageJSON,
             'code' => $this->httpCodeJSON,            
         ];        
         return $jsonResponse;
