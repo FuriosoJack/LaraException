@@ -11,7 +11,7 @@ Retorna excepciones de forma HTTP  JSON personalizada para laravel, en http redi
 ## Installation 
 
 ```bash
-$ php composer require furiosojack/lara-exception=^0.0
+$ composer require furiosojack/lara-exception
 ```
 
 OR 
@@ -21,7 +21,7 @@ add to your `composer.json`
 ```json
 {
     "require": {
-        "furiosojack/lara-exception": "^0.0"
+        "furiosojack/lara-exception": "^0.0.1"
     }
 }
 ```
@@ -45,10 +45,11 @@ Finally, add two class aliases to the aliases array of `config/app.php`:
 
 ## Examples
 
-this generates a log in `storage/logs/laravel.logg`
+this generates a log in `storage/logs/laravel.log`
 
  ```php
  LaraException::buildEJson("hola mundo",500);
+
 ```
 
 this does not generate a log in `storage/logs/laravel.logg`
@@ -57,8 +58,8 @@ this does not generate a log in `storage/logs/laravel.logg`
  LaraException::buildEJson("hola mundo",500,false);
 ```
 
+```
 result 
 ```json
 {"error":"hola mundo","code":500}
-```
 
