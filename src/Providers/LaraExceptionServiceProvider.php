@@ -10,6 +10,7 @@ namespace FuriosoJack\LaraException\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use FuriosoJack\LaraException\ExceptionFather;
+
 /**
  * Description of LaraExceptionServiceProvider
  *
@@ -18,12 +19,25 @@ use FuriosoJack\LaraException\ExceptionFather;
 class LaraExceptionServiceProvider extends ServiceProvider
 {
    
+    
+    
+    public function boot()
+    {
+        
+    }
     /**
      * Se encarga de registrar los servicio de la aplicacion
      */
     public function register()
     {
+        //Registra las rutas y macros         
+        $this->loadRoutesFrom(__DIR__.'/../routes.php');
+        
+        //Registra el servicio para la fachada
         $this->app->bind('laraexception',function(){
+            
+           //$request = app(\Illuminate\Http\Request::class);
+           //return app(ExceptionFather::class,[$request]);
            return new ExceptionFather;
         });
     }    

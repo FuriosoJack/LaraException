@@ -7,7 +7,8 @@
  */
 
 namespace FuriosoJack\LaraException;
-
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 /**
  * Description of ExceptionFather
  *
@@ -15,11 +16,43 @@ namespace FuriosoJack\LaraException;
  */
 class ExceptionFather
 {
+   
+    
     /**
-     * Se encarga de construir la Excepcion
+     * 
+     * @param string $message
+     * @param int $httpCode
+     * @param bool $status
+     * @param bool $log
+     * @throws Exceptions\BasicExceptionJSON
      */
-    public function buildE()
-    {
-        dd("soy laraException");
+    public function buildEJson(string $message = "", int $httpCode = 200, bool $log = true)
+    {        
+               
+        if($log)
+        {
+            $this->renderLog($message);
+        }
+        
+        throw new Exceptions\BasicExceptionJSON($message, $httpCode);
+    
     }
+
+    
+    private function renderLog($message)
+    {
+        Log::error(' **************************************** '
+                . ''
+                . 'Fecha: '. Carbon::now() . '  || '.
+                'Mensaje: '. $message                
+                );
+    }
+    
+    
+    
+
+    
+ 
+    
+    
 }
