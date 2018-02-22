@@ -15,7 +15,7 @@ use Carbon\Carbon;
 /**
  * Description of ExceptionFather
  *
- * @author Juan Diaz - FuriosoJack <http://blog.furiosojack.com/> 
+ * @author Juan Diaz - FuriosoJack <http://blog.furiosojack.com/>
  */
 class ExceptionFather
 {
@@ -48,16 +48,16 @@ class ExceptionFather
      * @throws Exceptions\BasicExceptionJSON
      */
     public function buildEJson(string $message = "", bool $log = true)
-    {        
+    {
 
         $this->message = $message;
         if($log)
         {
             $this->renderLog();
         }
-        
+
         throw new Exceptions\BasicExceptionJSON($message, 200);
-    
+
     }
 
     /**
@@ -105,7 +105,8 @@ class ExceptionFather
      */
     public function details(string $details)
     {
-        $this->details = $details;
+      $this->details = $details;
+      return $this;
     }
 
     public function withLog()
@@ -170,12 +171,12 @@ class ExceptionFather
     }
 
 
-    
-    
-    
 
-    
- 
-    
-    
+
+
+
+
+
+
+
 }
