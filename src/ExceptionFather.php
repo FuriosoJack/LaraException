@@ -71,6 +71,7 @@ class ExceptionFather
         if($this->log){
             $this->renderLog();
         }
+
         $this->runException();
     }
 
@@ -135,7 +136,10 @@ class ExceptionFather
         if($this->isJsonRequest()){
             throw new ExceptionJSON($this->message,$this->debugCode,$this->details);
         }
-        throw new ExceptionVIEW($this->message,$this->debugCode,$this->details);
+        if($this->showDetails){
+            throw new ExceptionVIEW($this->message,$this->debugCode,$this->details);
+        }
+        throw new ExceptionVIEW($this->message,$this->debugCode,"");
     }
 
 
