@@ -9,7 +9,7 @@
 namespace FuriosoJack\LaraException\Facades;
 use Illuminate\Support\Facades\Facade;
 /**
- * Description of LaraException
+ * Description of LaraExceptionManager
  *
  * @author Juan Diaz - FuriosoJack <http://blog.furiosojack.com/> 
  */

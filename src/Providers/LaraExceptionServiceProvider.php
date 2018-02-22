@@ -33,6 +33,8 @@ class LaraExceptionServiceProvider extends ServiceProvider
     {
         //Registra las rutas y macros         
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'lara_exception');
         
         //Registra el servicio para la fachada
         $this->app->bind('laraexception',function(){

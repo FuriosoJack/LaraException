@@ -7,6 +7,9 @@
  */
 
 namespace FuriosoJack\LaraException;
+use FuriosoJack\LaraException\Exceptions\ExceptionJSON;
+use FuriosoJack\LaraException\Exceptions\ExceptionVIEW;
+use FuriosoJack\LaraException\Interfaces\RenderException;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 /**
@@ -16,40 +19,157 @@ use Carbon\Carbon;
  */
 class ExceptionFather
 {
-   
-    
+
+    private $message;
+    private $debugCode;
+    private $deatils;
+    private $log;
+    private $showDetails;
+
+
+
+    public function __construct()
+    {
+        $this->debugCode = 0;
+        $this->details = "";
+        $this->log = false;
+        $this->showDetails = false;
+    }
+
     /**
+     *
      * Se encarga de generar la excepcion
      * @param string $message
      * @param int $httpCode
      * @param bool $status
      * @param bool $log
+     * @deprecated Ya nosera usado ya que ahora se implementa un creador
+     * de excepciones que detecta si la peticion es formato json o http y sera usado solo el metodo build
      * @throws Exceptions\BasicExceptionJSON
      */
-    public function buildEJson(string $message = "", int $httpCode = 200, bool $log = true)
+    public function buildEJson(string $message = "", bool $log = true)
     {        
-               
+
+        $this->message = $message;
         if($log)
         {
-            $this->renderLog($message);
+            $this->renderLog();
         }
         
-        throw new Exceptions\BasicExceptionJSON($message, $httpCode);
+        throw new Exceptions\BasicExceptionJSON($message, 200);
     
     }
 
     /**
+     * Se encarga de le ejecucion para la contruccion de la escepcion
+     * @throws ExceptionJSON
+     * @throws ExceptionVIEW
+     */
+    public function build()
+    {
+
+        if($this->log){
+            $this->renderLog();
+        }
+        $this->runException();
+    }
+
+
+    /**
+     * Llena el mensaje y retorna una instancia de el mismo
+     * @param string $message
+     * @return $this
+     */
+    public function message(string $message){
+        $this->message = $message;
+        return $this;
+
+    }
+
+
+
+    /**
+     * Se encarga de llenar el codigo de debuqueo del mensaje de error y retorna una instancia de el
+     * @param int $debuCode
+     * @return $this
+     */
+    public function debugCode(int $debuCode)
+    {
+        $this->debugCode = $debuCode;
+        return $this;
+    }
+
+    /**
+     * Llena
+     * @param string $details
+     */
+    public function details(string $details)
+    {
+        $this->details = $details;
+    }
+
+    public function withLog()
+    {
+        $this->log = true;
+        return $this;
+    }
+
+    public function showDetails()
+    {
+        $this->showDetails = true;
+        return $this;
+    }
+
+
+
+    /**
+     * Devuelve la excepcion que se va a lazar
+     * @param string $message
+     * @param int $debugCode
+     * @param string $details
+     * @return RenderException
+     */
+    private function runException()
+    {
+        if($this->isJsonRequest()){
+            throw new ExceptionJSON($this->message,$this->debugCode,$this->details);
+        }
+        throw new ExceptionVIEW($this->message,$this->debugCode,$this->details);
+    }
+
+
+    /**
+     * Valida si en los headers existe el application/json
+     * @return bool
+     */
+    private function isJsonRequest(): bool
+    {
+
+        if(!request()->hasHeader('Content-Type') || 'application/json' != request()->header('Content-Type') ){
+                return false;
+        }
+        return true;
+
+    }
+
+
+
+    /**
      * Se encarga de generar el log
      * @param string $message mensaje que aparecera en el log
+     * @param string $detatils detalles del error
      */
-    private function renderLog(string $message)
+    private function renderLog()
     {
-        Log::error(' **************************************** '
-                . ''
-                . 'Fecha: '. Carbon::now() . '  || '.
-                'Mensaje: '. $message                
+        Log::error(' *************'
+                . ' ' .
+                 'Mensaje: '. $this->message . ' || '.
+                    'Detalles: '. $this->details . ' || '.
+                    'DebugCode: ' . $this->debugCode . " *************"
                 );
     }
+
+
     
     
     
