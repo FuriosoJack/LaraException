@@ -1,7 +1,6 @@
 {
     "name": "furiosojack/lara-exception",
-    "description": "Es un generado de excepciones, es usado para lanzar excepciones al usuario y generar log detallados al desarollador, el paquete es capaz de detecta si la peticion es una application/json o peticion ajax de una peticion http por defecto o formulario. El caquete entrega al usuario una vista en caso de ser http normal con el mensaje que se le indique, si la peticion es JSON el error sera devuelto en un resonse en formato JSON.",
-    "type": "php",
+    "description": "Es un generador de excepciones, su fin es lanzar excepciones controladas al usuario con la posibilidad de generar log detallados al desarollador. El paquete es capaz de detectar una application/json de una peticion http por defecto. Este paquete entrega al usuario una vista en caso de ser http normal en donde se vera mensaje del error y un codigo de error, si la peticion es JSON el error sera devuelto en un resonse en formato JSON.",    "type": "php",
     "license": "MIT",
     "keywords": ["exceptions","laravel","excepcion","json","http", "request", "response", "exception manager"],
     "authors": [
