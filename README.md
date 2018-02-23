@@ -1,6 +1,6 @@
 # Español
 
-## Licensia
+## Licencia
 
   El codigo de licencia debe seguirse al pie de la letra, si usted utiliza esta libreria los derechos de autor deben estar incluidos en todas la copias.
     
@@ -93,6 +93,7 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
 * **showDetails()** - Este metodo permite que se muestre los detalles a la excepcion que se le muestra al usuario ya sea por HTTP norml o por JSON.
 
 * **build()** - *Este el utimo metodo que se debe llamar*. Este es el encargado de que la excepcion se lance. **Obligatorio**
+
 
 ##Ejemplos
 
