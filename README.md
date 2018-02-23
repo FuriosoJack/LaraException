@@ -56,7 +56,7 @@ para finalizar en su archivo `app/Exceptions/Handler.php` es necesario incluir l
  use FuriosoJack\LaraException\Exceptions\LaraExceptionManager;
  ```
  
- ahora la clase `Handler.php` en lugar de extender de `` debe extender es de  `LaraExceptionManager`  
+ ahora la clase `Handler.php` en lugar de extender de `ExceptionHandler` debe extender es de  `LaraExceptionManager`  
 quedando algo como esto:
 
 ```php
