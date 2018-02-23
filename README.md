@@ -101,21 +101,21 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
  Lanza una excepcion con el mensaje indicado
 
  ```php
- LaraException::message("hola mundo")->build();
+ \LaraException::message("hola mundo")->build();
 ```
 
 
 Lanza una excepcion con un codigo de debugueo personalizado
 
  ```php
- LaraException::message("hola mundo")->debugCode(15)->build();
+ \LaraException::message("hola mundo")->debugCode(15)->build();
 ```
  
  Lanza un excepcion con detalles y con debug code perzonalizado
  
  
  ```php
-  LaraException::message("hola mundo")
+  \LaraException::message("hola mundo")
   ->debugCode(15)
   ->details("Ya dije hola mundo?")
   ->build();
@@ -125,7 +125,7 @@ Lanza un excepcion con detalles y con debug code perzonalizado y un log
  
  
  ```php
-  LaraException::message("hola mundo")
+  \LaraException::message("hola mundo")
   ->debugCode(15)
   ->details("Ya dije hola mundo?")
   ->withLog()
@@ -136,7 +136,7 @@ Lanza un excepcion con detalles y con debug code perzonalizado y un log y muestr
  
  
  ```php
-  LaraException::message("hola mundo")
+  \LaraException::message("hola mundo")
   ->debugCode(15)
   ->details("Ya dije hola mundo?")
   ->withLog()
