@@ -95,7 +95,7 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
 * **build()** - *Este el utimo metodo que se debe llamar*. Este es el encargado de que la excepcion se lance. **Obligatorio**
 
 
-##Ejemplos
+## Ejemplos
 
 
  Lanza una excepcion con el mensaje indicado
@@ -148,7 +148,7 @@ Lanza un excepcion con detalles y con debug code perzonalizado y un log y muestr
 Se puede hace varias combinaciones de los metodos ya que estan encadenados pero obiamente 
 teniendoen cuenta que el metodo `build()` siempre sea el ultimo.
 
-##Salidas
+## Salidas
 
 En el caso de que la peticion sea JSON la respuesta se veria algo como:
 
