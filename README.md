@@ -161,6 +161,6 @@ En el caso de que la peticion sea JSON la respuesta se veria algo como:
 
 Si es una peticion es http normal se le mostrara una vista
 
-![alt text](https://imgur.com/a/MicMO)
+![ver](https://i.imgur.com/8QzdfEe.png)
 
 
