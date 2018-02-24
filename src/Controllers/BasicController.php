@@ -15,6 +15,10 @@ use App\Http\Controllers\Controller;;
  */
 class BasicController extends Controller
 {
+    /**
+     *  Controlador encargado de validar que debe retornar si la vista o el response JSON
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
 
     public function laraException()
     {
