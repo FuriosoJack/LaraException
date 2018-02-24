@@ -19,34 +19,11 @@ Response::macro('laraException',function(string $route, array $data){
 
 Route::group(['middleware' => ['web']],function(){
 
-    Route::get('exceptionView',[
-        'uses' => function(){
-
-            return view('lara_exception::error');
-        },
-        'as' => 'exceptionView'
+    Route::get('/laraexception',[
+        'uses' => 'FuriosoJack\LaraException\Controllers\BasicController@laraException',
+        'as' => 'laraException'
     ]);
 
-    Route::get('exceptionJSON',[
-        'uses' => function(){
-
-            $errors = \Session::get('errors');
-
-            $responseJson = [];
-
-            if($errors->has('details') && "" != $errors->first('details'))
-            {
-                $responseJson['details'] = $errors->first('details');
-            }
-
-            $responseJson['error'] = $errors->first('message');
-
-            $responseJson['debugCode'] = $errors->first('debugCode');
-
-            return response()->json($responseJson);
-        },
-        'as' => 'exceptionJSON'
-    ]);
 });
 
 
