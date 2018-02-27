@@ -27,7 +27,7 @@ o añadiendo directamente el el archivo `composer.json`
 ```json
 {
     "require": {
-        "furiosojack/lara-exception": "^0.0.1"
+        "furiosojack/lara-exception": "^0.0"
     }
 }
 ```
