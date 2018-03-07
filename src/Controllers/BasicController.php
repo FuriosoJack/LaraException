@@ -32,6 +32,7 @@ class BasicController extends Controller
             {
                 $responseJson['details'] = $errors->first('details');
             }
+            $responseJson['success'] = false;
 
             $responseJson['error'] = $errors->first('message');
 
@@ -49,10 +50,9 @@ class BasicController extends Controller
     private function isJsonRequest(): bool
     {
 
-        if(!request()->hasHeader('Content-Type') || 'application/json' != request()->header('Content-Type') ){
-            return false;
+        if((request()->hasHeader('Content-Type') && 'application/json' == request()->header('Content-Type')) || (request()->hasHeader('accept') && request()->header('accept') == 'application/json') ){
+            return true;
         }
-        return true;
-
+        return false;
     }
 }
