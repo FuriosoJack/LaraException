@@ -62,6 +62,11 @@ class ExceptionProyect extends \Exception implements RenderException
      */
     public function renderException()
     {
-        // TODO: Implement renderException() method.
+        return response()->laraException('laraException',[
+            'debugCode' => $this->getDebugCode(),
+            'message' => $this->getMessageException(),
+            'details' => $this->getDetails()
+        ]);
+
     }
 }

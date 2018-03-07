@@ -71,7 +71,7 @@ img{
           <div class="container cen">
             <p><i>{{$errors->first('details')}}</i></p>
           </div>
-          <button type="button" name="button" class="boton">Atrás</button>
+            <a href="/"><button type="button" name="button" class="boton">Volver</button></a>
         </div>
         <p class="credit"><i>Desarrollado por FuriosoJack, Diseñado por codwelt.com</i></p>    </div>
 

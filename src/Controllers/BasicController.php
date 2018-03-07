@@ -15,8 +15,44 @@ use App\Http\Controllers\Controller;;
  */
 class BasicController extends Controller
 {
-    public function basic()
+    /**
+     *  Controlador encargado de validar que debe retornar si la vista o el response JSON
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
+
+    public function laraException()
     {
-        return response()->laraException(['hola']);
+        $errors = \Session::get('errors');
+
+        if($this->isJsonRequest()){
+
+            $responseJson = [];
+
+            if($errors->has('details') && "" != $errors->first('details'))
+            {
+                $responseJson['details'] = $errors->first('details');
+            }
+
+            $responseJson['error'] = $errors->first('message');
+
+            $responseJson['debugCode'] = $errors->first('debugCode');
+
+            return response()->json($responseJson);
+        }
+        return view("lara_exception::error");
+    }
+
+    /**
+     * Valida si en los headers existe el application/json
+     * @return bool
+     */
+    private function isJsonRequest(): bool
+    {
+
+        if(!request()->hasHeader('Content-Type') || 'application/json' != request()->header('Content-Type') ){
+            return false;
+        }
+        return true;
+
     }
 }

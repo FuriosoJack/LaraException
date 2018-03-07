@@ -8,10 +8,10 @@
 
 namespace FuriosoJack\LaraException;
 use FuriosoJack\LaraException\Exceptions\ExceptionJSON;
+use FuriosoJack\LaraException\Exceptions\ExceptionProyect;
 use FuriosoJack\LaraException\Exceptions\ExceptionVIEW;
 use FuriosoJack\LaraException\Interfaces\RenderException;
 use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 /**
  * Description of ExceptionFather
  *
@@ -133,30 +133,12 @@ class ExceptionFather
      */
     private function runException()
     {
-        if($this->isJsonRequest()){
-            throw new ExceptionJSON($this->message,$this->debugCode,$this->details);
-        }
+
         if($this->showDetails){
-            throw new ExceptionVIEW($this->message,$this->debugCode,$this->details);
+            throw new ExceptionProyect($this->message,$this->debugCode,$this->details);
         }
-        throw new ExceptionVIEW($this->message,$this->debugCode,"");
+        throw new ExceptionProyect($this->message,$this->debugCode,"");
     }
-
-
-    /**
-     * Valida si en los headers existe el application/json
-     * @return bool
-     */
-    private function isJsonRequest(): bool
-    {
-
-        if(!request()->hasHeader('Content-Type') || 'application/json' != request()->header('Content-Type') ){
-                return false;
-        }
-        return true;
-
-    }
-
 
 
     /**
