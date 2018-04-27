@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;;
 /**
  * Description of BasicController
  *
- * @author Juan Diaz - FuriosoJack <http://blog.furiosojack.com/> 
+ * @author Juan Diaz - FuriosoJack <http://blog.furiosojack.com/>
  */
 class BasicController extends Controller
 {
@@ -20,27 +20,36 @@ class BasicController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
 
-    public function laraException()
+    public function laraException($base64)
     {
-        $errors = \Session::get('errors');
+
+        $errors = json_decode(base64_decode($base64),true);
+        if(is_null($errors)){
+            $errors  = [
+                'details' => false,
+                'message' => 'LaraException',
+                'debugCode' => '0'
+            ];
+        }
 
         if($this->isJsonRequest()){
 
             $responseJson = [];
 
-            if($errors->has('details') && "" != $errors->first('details'))
+            if($errors['details'])
             {
-                $responseJson['details'] = $errors->first('details');
+                $responseJson['details'] = $errors['details'];
             }
             $responseJson['success'] = false;
 
-            $responseJson['error'] = $errors->first('message');
+            $responseJson['error'] = $errors['message'];
 
-            $responseJson['debugCode'] = $errors->first('debugCode');
+            $responseJson['debugCode'] = $errors['debugCode'];
 
             return response()->json($responseJson);
         }
-        return view("lara_exception::error");
+        $errors['routeBack'] = redirect()->back()->getTargetUrl();
+        return view("lara_exception::error",$errors);
     }
 
     /**
