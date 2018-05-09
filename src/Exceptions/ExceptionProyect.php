@@ -18,12 +18,14 @@ class ExceptionProyect extends \Exception implements RenderException
     private $messageException;
     private $details;
     private $debugCode;
+    private $allErrors;
 
-    public function __construct(string $messageException = "", int $debugCode = 0, $details = "")
+    public function __construct(string $messageException = "", int $debugCode = 0, $details = "", array $erorrs = [])
     {
         $this->messageException = $messageException;
         $this->debugCode = $debugCode;
         $this->details = $details;
+        $this->allErrors = $erorrs;
     }
 
     /**
@@ -65,7 +67,8 @@ class ExceptionProyect extends \Exception implements RenderException
         return response()->laraException('laraException',[
             'debugCode' => $this->getDebugCode(),
             'message' => $this->getMessageException(),
-            'details' => $this->getDetails()
+            'details' => $this->getDetails(),
+            'errors' => $this->allErrors
         ]);
 
     }

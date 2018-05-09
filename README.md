@@ -145,18 +145,40 @@ Lanza un excepcion con detalles y con debug code perzonalizado y un log y muestr
 
 ```
 
+
+
+En el siguiente ejemplo corresonde a la forma de enviar los errores en un array, solo funciona cuando la peticion se tiene el header Accept: applitacion/json
+
+ ```php
+  \LaraException::message("hola mundo")
+  ->debugCode(15)
+  ->details("Ya dije hola mundo?")
+  ->withLog()
+  ->errors([
+    "juan" => "nombre invalido",
+    "petro" => "nombre no existe"
+  ])
+  ->showDetails()
+  ->build();
+
+```
+
+
 Se puede hace varias combinaciones de los metodos ya que estan encadenados pero obiamente 
 teniendoen cuenta que el metodo `build()` siempre sea el ultimo.
+
+
 
 ## Salidas
 
 En el caso de que la peticion sea JSON la respuesta se veria algo como:
 
 ```json
-  { 
-    "error" : "hola mundo", 
-    "debugCode" : 150,
-    "details" : "Ya dije hola mundo?"
+  {
+  "success":false,
+  "error":"Factura ya alamacenada",
+  "debugCode":"0",
+  "errors" : []
   }
 ```
 

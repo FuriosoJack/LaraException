@@ -25,6 +25,7 @@ class ExceptionFather
     private $deatils;
     private $log;
     private $showDetails;
+    private $errors;
 
 
 
@@ -33,6 +34,7 @@ class ExceptionFather
         $this->debugCode = 0;
         $this->details = "";
         $this->log = false;
+        $this->errors = [];
         $this->showDetails = false;
     }
 
@@ -87,6 +89,16 @@ class ExceptionFather
 
     }
 
+    /**
+     * @param array $errors
+     * @return $this
+     */
+    public function errors(array $errors)
+    {
+        $this->errors = $errors;
+        return $this;
+    }
+
 
 
     /**
@@ -135,9 +147,9 @@ class ExceptionFather
     {
 
         if($this->showDetails){
-            throw new ExceptionProyect($this->message,$this->debugCode,$this->details);
+            throw new ExceptionProyect($this->message,$this->debugCode,$this->details,$this->errors);
         }
-        throw new ExceptionProyect($this->message,$this->debugCode,"");
+        throw new ExceptionProyect($this->message,$this->debugCode,"",$this->errors);
     }
 
 

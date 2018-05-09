@@ -28,7 +28,8 @@ class BasicController extends Controller
             $errors  = [
                 'details' => false,
                 'message' => 'LaraException',
-                'debugCode' => '0'
+                'debugCode' => '0',
+                'errors' => []
             ];
         }
 
@@ -43,6 +44,8 @@ class BasicController extends Controller
             $responseJson['success'] = false;
 
             $responseJson['error'] = $errors['message'];
+
+            $responseJson['errors'] = $errors['errors'];
 
             $responseJson['debugCode'] = $errors['debugCode'];
 
