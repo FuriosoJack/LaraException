@@ -24,6 +24,7 @@ class BasicController extends Controller
     {
 
         $errors = json_decode(base64_decode($base64),true);
+        dd("nuevamente");
         if(is_null($errors)){
             $errors  = [
                 'details' => false,

@@ -14,8 +14,6 @@ Response::macro('laraException',function(callable $callback){
 });*/
 Response::macro('laraException',function(string $route, array $data){
     //return response()->json(['fg']);
-    dd(json_encode($data));
-
     return redirect()->route($route,['base64' => base64_encode(json_encode($data))]);
 
 });
