@@ -7,7 +7,11 @@
  */
 
 namespace FuriosoJack\LaraException\Controllers;
-use App\Http\Controllers\Controller;;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+;
+
 /**
  * Description of BasicController
  *
@@ -20,9 +24,22 @@ class BasicController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
 
-    public function laraException($base64)
+    public function laraException(Request $request)
     {
-        $errors = json_decode(base64_decode($base64),true);
+
+        $urlEncode = $request->get('laraCode');
+
+        $errors = [];
+        if(is_null($urlEncode)){
+            $errors  = [
+                'details' => false,
+                'message' => 'LaraException',
+                'debugCode' => '0',
+                'errors' => []
+            ];
+        }
+        $urlEncode = urldecode($urlEncode);
+        $errors = json_decode(base64_decode($urlEncode),true);
         if(is_null($errors)){
             $errors  = [
                 'details' => false,
@@ -40,6 +57,7 @@ class BasicController extends Controller
             {
                 $responseJson['details'] = $errors['details'];
             }
+
             $responseJson['success'] = false;
 
             $responseJson['error'] = $errors['message'];

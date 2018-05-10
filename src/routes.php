@@ -14,13 +14,13 @@ Response::macro('laraException',function(callable $callback){
 });*/
 Response::macro('laraException',function(string $route, array $data){
     //return response()->json(['fg']);
-    return redirect()->route($route,['base64' => base64_encode(json_encode($data))]);
+    return redirect()->route($route,['laraCode' => urlencode(base64_encode(json_encode($data)))]);
 
 });
 
 //Route::group(['middleware' => ['web']],function(){
 
-Route::any('/laraexception/{base64}',[
+Route::any('/laraexception/',[
     'uses' => '\FuriosoJack\LaraException\Controllers\BasicController@laraException',
     'as' => 'laraException'
 ]);
