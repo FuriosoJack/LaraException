@@ -22,7 +22,6 @@ class BasicController extends Controller
 
     public function laraException($base64)
     {
-        dd(base64_decode($base64));
         $errors = json_decode(base64_decode($base64),true);
         if(is_null($errors)){
             $errors  = [
