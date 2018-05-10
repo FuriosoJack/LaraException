@@ -23,5 +23,15 @@
     },	
     "require": {
 		"php": ">= 5.4"
-	}
+	},
+    "extra": {
+      "laravel": {
+        "providers": [
+          "FuriosoJack\\LaraException\\Providers\\LaraExceptionServiceProvider"
+        ],
+        "aliases": {
+          "LaraException":  "FuriosoJack\\LaraException\\Facades\\LaraExceptionFacade"
+        }
+      }
+    }
 }
