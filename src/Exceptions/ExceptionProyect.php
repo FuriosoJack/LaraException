@@ -68,7 +68,7 @@ class ExceptionProyect extends \Exception implements RenderException
             'debugCode' => $this->getDebugCode(),
             'message' => $this->getMessageException(),
             'details' => $this->getDetails(),
-            'errors' => json_encode($this->allErrors)
+            'errors' => $this->allErrors
         ]);
 
     }
