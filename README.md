@@ -147,7 +147,7 @@ Lanza un excepcion con detalles y con debug code perzonalizado y un log y muestr
 
 
 
-En el siguiente ejemplo corresonde a la forma de enviar los errores en un array, solo funciona cuando la peticion se tiene el header Accept: applitacion/json
+En el siguiente ejemplo corresonde a la forma de enviar los errores en un array, solo funciona cuando la peticion tiene el header Accept: applitacion/json
 
  ```php
   \LaraException::message("hola mundo")
