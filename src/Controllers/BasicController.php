@@ -26,25 +26,20 @@ class BasicController extends Controller
 
     public function laraException(Request $request)
     {
-
+        $info = $request->cookie('lara_exception_code');
         $errors =[];
-        if(is_null($request->get('laraCode'))){
+        if(is_null($info)){
             $errors  = [
                 'details' => false,
                 'message' => 'LaraException',
                 'debugCode' => '0',
                 'errors' => []
             ];
-        }
-
-        $errors = json_decode(base64_decode(urldecode($request->get('laraCode'))),true);
-        if(is_null($errors)){
-            $errors  = [
-                'details' => false,
-                'message' => 'LaraException',
-                'debugCode' => '0',
-                'errors' => []
-            ];
+        }else{
+            $urlEncode = \Crypt::decrypt($info);
+            \Cookie::forget('lara_exception_code');
+            $urlEncode = urldecode($urlEncode);
+            $errors = json_decode(base64_decode($urlEncode),true);
         }
 
         if($this->isJsonRequest()){

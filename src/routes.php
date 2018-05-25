@@ -21,7 +21,8 @@ Response::macro('laraException',function(string $route, array $data){
      session()->save();
      return redirect()->route($route);*/
 
-    return redirect()->route($route,['laraCode' => urlencode(base64_encode(json_encode($data)))]);
+    $cookie = cookie('lara_exception_code', urlencode(base64_encode(json_encode($data))), '1');
+    return redirect()->route($route)->withCookie($cookie);
 
 });
 
