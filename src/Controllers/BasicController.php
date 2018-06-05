@@ -27,11 +27,13 @@ class BasicController extends Controller
     public function laraException(Request $request)
     {
         $info = $request->cookie('lara_exception_code');
+
         $errors =[];
+
         if(is_null($info)){
             $errors  = [
                 'details' => false,
-                'message' => 'LaraException',
+                'error' => 'LaraException',
                 'debugCode' => '0',
                 'errors' => []
             ];
@@ -41,39 +43,8 @@ class BasicController extends Controller
             $urlEncode = urldecode($urlEncode);
             $errors = json_decode(base64_decode($urlEncode),true);
         }
-
-        if($this->isJsonRequest()){
-
-            $responseJson = [];
-
-            if($errors['details'])
-            {
-                $responseJson['details'] = $errors['details'];
-            }
-            $responseJson['success'] = false;
-
-            $responseJson['error'] = $errors['message'];
-
-            $responseJson['errors'] = $errors['errors'];
-
-            $responseJson['debugCode'] = $errors['debugCode'];
-
-            return response()->json($responseJson);
-        }
         $errors['routeBack'] = redirect()->back()->getTargetUrl();
         return view("lara_exception::error",$errors);
     }
 
-    /**
-     * Valida si en los headers existe el application/json
-     * @return bool
-     */
-    private function isJsonRequest(): bool
-    {
-
-        if((request()->hasHeader('Content-Type') && 'application/json' == request()->header('Content-Type')) || (request()->hasHeader('accept') && request()->header('accept') == 'application/json') ){
-            return true;
-        }
-        return false;
-    }
 }

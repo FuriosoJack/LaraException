@@ -7,9 +7,9 @@
  */
 
 namespace FuriosoJack\LaraException;
-use FuriosoJack\LaraException\Exceptions\ExceptionJSON;
+use FuriosoJack\LaraException\Exceptions\ExceptionJson;
 use FuriosoJack\LaraException\Exceptions\ExceptionProyect;
-use FuriosoJack\LaraException\Exceptions\ExceptionVIEW;
+use FuriosoJack\LaraException\Exceptions\ExceptionView;
 use FuriosoJack\LaraException\Interfaces\RenderException;
 use Illuminate\Support\Facades\Log;
 /**
@@ -22,20 +22,21 @@ class ExceptionFather
 
     private $message;
     private $debugCode;
-    private $deatils;
+    private $details;
     private $log;
     private $showDetails;
     private $errors;
+    private $exception;
+    private $showErrors;
 
 
 
     public function __construct()
     {
-        $this->debugCode = 0;
-        $this->details = "";
         $this->log = false;
-        $this->errors = [];
         $this->showDetails = false;
+        $this->showErrors = false;
+        $this->message = "LARAEXCEPTION";
     }
 
     /**
@@ -58,24 +59,12 @@ class ExceptionFather
             $this->renderLog();
         }
 
+
         throw new Exceptions\BasicExceptionJSON($message, 200);
 
     }
 
-    /**
-     * Se encarga de le ejecucion para la contruccion de la escepcion
-     * @throws ExceptionJSON
-     * @throws ExceptionVIEW
-     */
-    public function build()
-    {
 
-        if($this->log){
-            $this->renderLog();
-        }
-
-        $this->runException();
-    }
 
 
     /**
@@ -115,11 +104,20 @@ class ExceptionFather
     /**
      * Llena
      * @param string $details
+     * @deprecated
      */
     public function details(string $details)
     {
-      $this->details = $details;
-      return $this;
+        $this->details = $details;
+        return $this;
+    }
+
+    private function getDetails()
+    {
+        if($this->showDetails){
+            return $this->details;
+        }
+        return  null;
     }
 
     public function withLog()
@@ -134,22 +132,53 @@ class ExceptionFather
         return $this;
     }
 
+    public function showErrors()
+    {
+        $this->showErrors = true;
+        return $this;
+    }
+
+    private function getErrors()
+    {
+        if($this->showErrors){
+            return $this->errors;
+        }
+        return null;
+    }
 
 
     /**
-     * Devuelve la excepcion que se va a lazar
-     * @param string $message
-     * @param int $debugCode
-     * @param string $details
-     * @return RenderException
+     * Valida si en los headers existe el application/json
+     * @return bool
      */
-    private function runException()
+    private function isJsonRequest(): bool
     {
 
-        if($this->showDetails){
-            throw new ExceptionProyect($this->message,$this->debugCode,$this->details,$this->errors);
+        if((request()->hasHeader('Content-Type') && 'application/json' == request()->header('Content-Type')) || (request()->hasHeader('accept') && request()->header('accept') == 'application/json') ){
+            return true;
         }
-        throw new ExceptionProyect($this->message,$this->debugCode,"",$this->errors);
+        return false;
+    }
+
+    private function buildException()
+    {
+        if($this->isJsonRequest()){
+            $this->setException(new ExceptionJson($this->message,$this->debugCode,$this->details,$this->errors));
+        }else{
+            $this->setException(new ExceptionView($this->message,$this->debugCode,$this->details,$this->errors));
+        }
+    }
+
+
+
+    private function setException($exception)
+    {
+        $this->exception = $exception;
+    }
+
+    private function getException(): ExceptionProyect
+    {
+        return $this->exception;
     }
 
 
@@ -160,19 +189,35 @@ class ExceptionFather
      */
     private function renderLog()
     {
-        Log::error(' *************'
-                . ' ' .
-                 'Mensaje: '. $this->message . ' || '.
-                    'Detalles: '. $this->details . ' || '.
-                    'DebugCode: ' . $this->debugCode . " *************"
-                );
+
+        Log::error($this->getException()->toJsonString());
     }
 
 
+    /**
+     * Se encarga de le ejecucion para la contruccion de la escepcion
+     * @throws ExceptionJSON
+     * @throws ExceptionVIEW
+     */
+    public function build(int $httpCode = 200)
+    {
 
+        $this->buildException();
 
+        if(!$this->showDetails){
+            $this->getException()->setDetails(null);
+        }
 
+        if(!$this->showErrors){
+            $this->getException()->setErrors(null);
+        }
+        $this->getException()->setHttpCode($httpCode);
 
+        if($this->log){
+            $this->renderLog();
+        }
+        throw $this->getException();
+    }
 
 
 

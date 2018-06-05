@@ -8,24 +8,31 @@
 
 namespace FuriosoJack\LaraException\Exceptions;
 
-use FuriosoJack\LaraException\Interfaces\Illuminate;
-use FuriosoJack\LaraException\Interfaces\RenderException;
 use Throwable;
 
-class ExceptionProyect extends \Exception implements RenderException
+/**
+ * Class ExceptionProyect
+ * @package FuriosoJack\LaraException\Exceptions
+ * @author Juan Diaz - FuriosoJack <iam@furiosojack.com>
+ */
+class ExceptionProyect extends \Exception
 {
 
     private $messageException;
     private $details;
     private $debugCode;
     private $allErrors;
+    private $httpCode;
 
-    public function __construct(string $messageException = "", int $debugCode = 0, $details = "", array $erorrs = [])
+
+    public function __construct($messageException, $debugCode, $details, $erorrs, $httpCode = 200)
     {
+
         $this->messageException = $messageException;
         $this->debugCode = $debugCode;
         $this->details = $details;
         $this->allErrors = $erorrs;
+        $this->httpCode = $httpCode;
     }
 
     /**
@@ -39,12 +46,12 @@ class ExceptionProyect extends \Exception implements RenderException
     /**
      * @return string
      */
-    public function getDetails(): string
+    public function getDetails()
     {
         return $this->details;
     }
 
-    public function setDetails(string $details)
+    public function setDetails($details)
     {
         $this->details = $details;
     }
@@ -52,24 +59,49 @@ class ExceptionProyect extends \Exception implements RenderException
     /**
      * @return int
      */
-    public function getDebugCode(): int
+    public function getDebugCode()
     {
         return $this->debugCode;
     }
 
-
-    /**
-     *  Renderiza el response
-     * @return Illuminate\Http\Response $response
-     */
-    public function renderException()
+    public function setErrors($errors)
     {
-        return response()->laraException('laraException',[
-            'debugCode' => $this->getDebugCode(),
-            'message' => $this->getMessageException(),
-            'details' => $this->getDetails(),
-            'errors' => $this->allErrors
-        ]);
-
+        $this->allErrors = $errors;
     }
+    public function getErrors()
+    {
+        return $this->allErrors;
+    }
+
+    public function getHttpCode()
+    {
+        return $this->httpCode;
+    }
+
+    public function setHttpCode(int $httpCode)
+    {
+        $this->httpCode = $httpCode;
+    }
+
+    public function toArray()
+    {
+        return [
+            'error' => $this->getMessageException(),
+            'errors' => $this->getErrors(),
+            'debugCode' => $this->getDebugCode(),
+            'details' => $this->getDetails()
+        ];
+    }
+
+    public function toJsonString()
+    {
+        return json_encode($this->toArray());
+    }
+
+    public function toJsonObject()
+    {
+        return json_decode($this->toJsonString());
+    }
+
+
 }

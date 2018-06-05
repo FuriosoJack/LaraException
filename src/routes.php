@@ -14,13 +14,10 @@ Response::macro('laraException',function(callable $callback){
 });*/
 Response::macro('laraException',function(string $route, array $data){
     //return response()->json(['fg']);
-
     //return redirect()->action('\FuriosoJack\LaraException\Controllers\BasicController@laraException',['base64' => base64_encode(json_encode($data))]);
-
     /* session()->push('base64',base64_encode(json_encode($data)));
      session()->save();
      return redirect()->route($route);*/
-
     $cookie = cookie('lara_exception_code', urlencode(base64_encode(json_encode($data))), '1');
     return redirect()->route($route)->withCookie($cookie);
 
