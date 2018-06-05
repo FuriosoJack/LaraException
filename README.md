@@ -88,13 +88,15 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
 
 * **withLog()** - Este metodo no recibe ningun parametros. Es usado para indicar que se quiere generar un log por dicha excepcion.
-    Los logs quedan almacenados dependiendo de como se tenga configurado en el proyecto, un proyecto donde no se le haya modificado el lugar de los log estos se almacenaran en `storage/logs/laravel.log`  
+    Los logs quedan almacenados dependiendo de como se tenga configurado en el proyecto, un proyecto donde no se le haya modificado el lugar de los log estos se almacenaran en `storage/logs/laravel.log`, si se especifican detalles y errores siempre seran mostrado en el log.  
 
 * **showDetails()** - Este metodo permite que se muestre los detalles a la excepcion que se le muestra al usuario ya sea por HTTP norml o por JSON.
 
 * **build()** - *Este el utimo metodo que se debe llamar*. Este es el encargado de que la excepcion se lance. **Obligatorio**
 
+* **showErros()** - Muestra los errores en la respuesta si no se especifican errores se mostrara como null
 
+* **errors()** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showeErrors`
 ## Ejemplos
 
 
@@ -141,6 +143,7 @@ Lanza un excepcion con detalles y con debug code perzonalizado y un log y muestr
   ->details("Ya dije hola mundo?")
   ->withLog()
   ->showDetails()
+  ->showErrors()
   ->build();
 
 ```
@@ -174,12 +177,16 @@ teniendoen cuenta que el metodo `build()` siempre sea el ultimo.
 En el caso de que la peticion sea JSON la respuesta se veria algo como:
 
 ```json
-  {
-  "success":false,
-  "error":"Factura ya alamacenada",
-  "debugCode":"0",
-  "errors" : []
-  }
+{
+    "error": "hola mundo",
+    "errors": {
+        "juan": "nombre invalido",
+        "petro": "nombre no existe"
+    },
+    "debugCode": 15,
+    "details": "Ya dije hola mundo?",
+    "success": false
+}
 ```
 
 Si es una peticion es http normal se le mostrara una vista
