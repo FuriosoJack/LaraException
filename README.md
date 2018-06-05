@@ -193,4 +193,9 @@ Si es una peticion es http normal se le mostrara una vista
 
 ![ver](https://i.imgur.com/8QzdfEe.png)
 
+Ejemplo de logs
+
+![ver](https://imgur.com/a/aA4aWy8)
+
+
 
