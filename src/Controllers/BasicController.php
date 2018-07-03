@@ -28,13 +28,15 @@ class BasicController extends Controller
     public function laraException(Request $request)
     {
         $fileSystem = new Filesystem();
+        $pathFile = path_laraException('/TMP/errors/'.base64_decode(urldecode($request->get('errors'))));
+        if(!$fileSystem->exists($pathFile)){
+            $info = null;
+        }else{
+            $info = $fileSystem->get($pathFile);
+        }
 
-        $info = $fileSystem->get(path_laraException('/TMP/errors/'.base64_decode(urldecode($request->get('errors')))));
-        dd($info);
        // $info = $request->cookie('lara_exception_code');
-
         $errors =[];
-
         if(is_null($info)){
             $errors  = [
                 'details' => false,
@@ -46,6 +48,7 @@ class BasicController extends Controller
             //$urlEncode = \Crypt::decrypt($info);
             //\Cookie::forget('lara_exception_code');
             ///$urlEncode = urldecode($info);
+            $fileSystem->delete($pathFile);
             $errors = json_decode(base64_decode($info),true);
         }
         $errors['routeBack'] = redirect()->back()->getTargetUrl();

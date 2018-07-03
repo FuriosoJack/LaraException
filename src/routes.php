@@ -20,8 +20,7 @@ Response::macro('laraException',function(string $route, array $data){
      session()->save();
      return redirect()->route($route);*/
     $dataEncrypted = base64_encode(json_encode($data));
-    $cookie = cookie('lara_exception_code', $dataEncrypted, '1');
-
+//    $cookie = cookie('lara_exception_code', $dataEncrypted, '1');
     $fileSystem = new Filesystem();
     $fileName = (string)Carbon::now()->timestamp . ".txt";
     $pathFile = path_laraException('TMP/errors/'.$fileName);
