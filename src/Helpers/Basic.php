@@ -20,7 +20,7 @@ if(!function_exists('lara_exception')){
      * @param string $path
      * @return string
      */
-    function lara_exception($message)
+    function lara_exception($message): FuriosoJack\LaraException\ExceptionFather
     {
         $lara = new \FuriosoJack\LaraException\ExceptionFather();
         $lara->message($message);
