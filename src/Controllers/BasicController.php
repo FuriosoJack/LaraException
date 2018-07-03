@@ -8,6 +8,7 @@
 
 namespace FuriosoJack\LaraException\Controllers;
 use App\Http\Controllers\Controller;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 
 
@@ -26,7 +27,11 @@ class BasicController extends Controller
 
     public function laraException(Request $request)
     {
-        $info = $request->cookie('lara_exception_code');
+        $fileSystem = new Filesystem();
+
+        $info = $fileSystem->get(path_laraException($request->get('errors')));
+        dd($info);
+       // $info = $request->cookie('lara_exception_code');
 
         $errors =[];
 
@@ -38,9 +43,9 @@ class BasicController extends Controller
                 'errors' => []
             ];
         }else{
-            $urlEncode = \Crypt::decrypt($info);
-            \Cookie::forget('lara_exception_code');
-            $urlEncode = urldecode($urlEncode);
+            //$urlEncode = \Crypt::decrypt($info);
+            //\Cookie::forget('lara_exception_code');
+            $urlEncode = urldecode($info);
             $errors = json_decode(base64_decode($urlEncode),true);
         }
         $errors['routeBack'] = redirect()->back()->getTargetUrl();

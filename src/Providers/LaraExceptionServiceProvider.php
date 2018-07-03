@@ -23,7 +23,11 @@ class LaraExceptionServiceProvider extends ServiceProvider
     
     public function boot()
     {
-        
+
+        //Registrar helpers
+        foreach (glob(__DIR__."/Helpers/*.php") as $fileName){
+            require_once $fileName;
+        }
     }
     
     /**

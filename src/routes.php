@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Response;
-
+use Carbon\Carbon;
+use Illuminate\Filesystem\Filesystem;
 //Macro para response json
 Response::macro('laraExceptionJson',function($data){
     return response()->json($data);
@@ -18,8 +19,15 @@ Response::macro('laraException',function(string $route, array $data){
     /* session()->push('base64',base64_encode(json_encode($data)));
      session()->save();
      return redirect()->route($route);*/
-    $cookie = cookie('lara_exception_code', urlencode(base64_encode(json_encode($data))), '1');
-    return redirect()->route($route)->withCookie($cookie);
+    $dataEncrypted = urlencode(base64_encode(json_encode($data)));
+    $cookie = cookie('lara_exception_code', $dataEncrypted, '1');
+
+    $fileSystem = new Filesystem();
+
+    $fileName = (string)Carbon::now()->timestamp;
+    $pathFile = path_laraException($fileName);
+    $fileSystem->put($pathFile,$dataEncrypted);
+    return redirect()->route($route,['errors' => base64_encode($fileName)]);
 
 });
 
