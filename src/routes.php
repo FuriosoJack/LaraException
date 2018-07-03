@@ -23,7 +23,6 @@ Response::macro('laraException',function(string $route, array $data){
     $cookie = cookie('lara_exception_code', $dataEncrypted, '1');
 
     $fileSystem = new Filesystem();
-
     $fileName = (string)Carbon::now()->timestamp;
     $pathFile = path_laraException($fileName);
     $fileSystem->put($pathFile,$dataEncrypted);
