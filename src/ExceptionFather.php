@@ -202,7 +202,9 @@ class ExceptionFather
     public function build(int $httpCode = 200)
     {
 
-        $this->buildException();
+        if($this->log){
+            $this->renderLog();
+        }
 
         if(!$this->showDetails){
             $this->getException()->setDetails(null);
@@ -213,9 +215,8 @@ class ExceptionFather
         }
         $this->getException()->setHttpCode($httpCode);
 
-        if($this->log){
-            $this->renderLog();
-        }
+        $this->buildException();
+
         throw $this->getException();
     }
 
