@@ -29,7 +29,7 @@ class BasicController extends Controller
     {
         $fileSystem = new Filesystem();
 
-        $info = $fileSystem->get(path_laraException($request->get('errors')));
+        $info = $fileSystem->get(path_laraException('/TMP/errors/'.base64_decode($request->get('errors'))));
         dd($info);
        // $info = $request->cookie('lara_exception_code');
 
