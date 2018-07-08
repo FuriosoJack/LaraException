@@ -7,8 +7,10 @@
  */
 
 namespace FuriosoJack\LaraException\Controllers;
-use App\Http\Controllers\Controller;
+
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 ;
@@ -19,6 +21,8 @@ use Illuminate\Http\Request;
  */
 class BasicController extends Controller
 {
+
+    const VIEW_DEFAULT = "lara_exception::error";
     /**
      *  Controlador encargado de validar que debe retornar si la vista o el response JSON
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
@@ -26,10 +30,21 @@ class BasicController extends Controller
 
     public function laraException(Request $request)
     {
-        $info = $request->cookie('lara_exception_code');
 
+
+
+        $storage = Storage::disk('local');
+        $fileName = base64_decode(urldecode($request->get('errors')));
+        if(!$storage->exists($fileName)){
+            $info = null;
+        }else{
+            $info = $storage->get($fileName);
+        }
+
+        $view = self::VIEW_DEFAULT;
+
+       // $info = $request->cookie('lara_exception_code');
         $errors =[];
-
         if(is_null($info)){
             $errors  = [
                 'details' => false,
@@ -37,14 +52,19 @@ class BasicController extends Controller
                 'debugCode' => '0',
                 'errors' => []
             ];
+
         }else{
-            $urlEncode = \Crypt::decrypt($info);
-            \Cookie::forget('lara_exception_code');
-            $urlEncode = urldecode($urlEncode);
-            $errors = json_decode(base64_decode($urlEncode),true);
+            //$urlEncode = \Crypt::decrypt($info);
+            //\Cookie::forget('lara_exception_code');
+            ///$urlEncode = urldecode($info);
+            $storage->delete($fileName);
+
+            $data = json_decode(base64_decode($info),true);
+            $errors = $data['errors'];
+            $view = $data['view'];
         }
         $errors['routeBack'] = redirect()->back()->getTargetUrl();
-        return view("lara_exception::error",$errors);
+        return view($view,$errors);
     }
 
 }

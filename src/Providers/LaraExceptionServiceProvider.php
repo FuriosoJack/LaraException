@@ -18,12 +18,14 @@ use FuriosoJack\LaraException\ExceptionFather;
  */
 class LaraExceptionServiceProvider extends ServiceProvider
 {
-   
-    
-    
+
+    const TAGS_PUBLISHED = ['config.lara_exception' => 'config.lara_exception'];
+
     public function boot()
-    {
-        
+    {        //Registrar helpers
+        foreach (glob(dirname(__DIR__)."/Helpers/*.php") as $fileName){
+            require_once $fileName;
+        }
     }
     
     /**
@@ -43,5 +45,21 @@ class LaraExceptionServiceProvider extends ServiceProvider
            //return app(ExceptionFather::class,[$request]);
            return new ExceptionFather;
         });
-    }    
+    }
+
+
+    public function publishFiles()
+    {
+
+        $publishable = [
+            self::TAGS_PUBLISHED['config.lara_exception'] => [
+                __DIR__ . '/Confi/LaraException.php' => config_path('LaraException.php')
+            ]
+        ];
+
+        foreach ($publishable as $tag => $path){
+            $this->publishes($path,$tag);
+        }
+
+    }
 }

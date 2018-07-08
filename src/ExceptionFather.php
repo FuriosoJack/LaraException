@@ -29,7 +29,7 @@ class ExceptionFather
     private $exception;
     private $showErrors;
     private $style;
-    private $redirect;
+
 
     const STYLE_DEFUALT = "default";
 
@@ -163,13 +163,6 @@ class ExceptionFather
         return $this;
     }
 
-    /**
-     * Hace que no se redireccione cuando se ejecute la excepcion
-     */
-    public function noRedirect()
-    {
-        $this->redirect = false;
-    }
 
     /**
      *
@@ -179,10 +172,16 @@ class ExceptionFather
     private function getVewPath()
     {
         return config('LaraException.'.$this->style . '.view' );
-
     }
 
-
+    /**
+     * Devuelve la configuracion de la redirecion
+     * @return \Illuminate\Config\Repository|mixed
+     */
+    public function getRedirect()
+    {
+        return config('LaraException.'.$this->style . '.redirect' );
+    }
 
 
 
@@ -205,10 +204,9 @@ class ExceptionFather
         if($this->isJsonRequest()){
             $this->setException(new ExceptionJson($this->message,$this->debugCode,$this->details,$this->errors));
         }else{
-
             $exception = new ExceptionView($this->message,$this->debugCode,$this->details,$this->errors);
             $exception->setViewPath($this->getVewPath());
-            $exception-
+            $exception->setRedirectPath($this->getRedirect());
             $this->setException($exception);
         }
     }
@@ -219,6 +217,7 @@ class ExceptionFather
     {
         $this->exception = $exception;
     }
+
 
     private function getException(): ExceptionProyect
     {
@@ -245,8 +244,12 @@ class ExceptionFather
      */
     public function build(int $httpCode = 200)
     {
-
+        //Lo primero que todo
         $this->buildException();
+
+        if($this->log){
+            $this->renderLog();
+        }
 
         if(!$this->showDetails){
             $this->getException()->setDetails(null);
@@ -257,10 +260,6 @@ class ExceptionFather
         }
 
         $this->getException()->setHttpCode($httpCode);
-
-        if($this->log){
-            $this->renderLog();
-        }
 
         throw $this->getException();
     }
