@@ -64,7 +64,7 @@ class ExceptionView extends ExceptionProyect implements RenderException
 
             return response()->laraException('laraException',$data);
         }
-        return response()->view($this->getVewPath(),$this->getHttpCode());
+        return response()->view($this->getVewPath(),$this->toArray(),$this->getHttpCode());
 
     }
 
