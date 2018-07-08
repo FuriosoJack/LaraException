@@ -52,6 +52,7 @@ class LaraExceptionServiceProvider extends ServiceProvider
         $this->publishFiles();
 
 
+        //Se registra el singleton
         $this->app->singleton('LaraExceptionMasterManger',function(){
            return new Manager();
         });

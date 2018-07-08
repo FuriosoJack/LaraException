@@ -31,17 +31,16 @@ class LaraExceptionManager extends Handler
         }
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param Exception $exception
+     * @return mixed|\Symfony\Component\HttpFoundation\Response
+     */
     public function render($request, Exception $exception)
     {
-      /*  //Se valida si la exepcion este este paquete para renderizarla de la forma que se quiere
-        if($exception instanceof ExceptionProyect){
-            return $exception->renderException();
-        }*/
-
         $masterManager = lara_exception_masterManager();
         $callback = $masterManager->getCallBack($request,$exception);
-        dd($callback);
-        if($callback){
+        if(!is_null($callback)){
             return $callback;
         }
         return parent::render($request, $exception);

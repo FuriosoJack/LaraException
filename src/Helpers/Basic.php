@@ -31,7 +31,7 @@ if(!function_exists('lara_exception')){
 
 if(!function_exists('lara_exception_masterManager')){
     /**
-     * Devuleve la ruta completa de la ubicacion del paquete
+     * Devuelve el objeto del master manager por medio del singleton
      * @param string $path
      * @return string
      */

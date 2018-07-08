@@ -7,6 +7,7 @@ use FuriosoJack\LaraException\Exceptions\ExceptionProyect;
 
 /**
  * Class Manager
+ * Es capaz de añadirle validaciones persoanizadas antes de realizar en render la excepcion,
  * @package FuriosoJack\LaraException\Core
  * @author FuriosoJack <iam@furiosojack.com>
  */
@@ -27,23 +28,41 @@ class Manager
         ];
     }
 
+    /**
+     * Obtiene el listado de callback que se realizaran
+     * @return array
+     */
     public function getCallBacks()
     {
         return $this->exceptionsCallbacks;
     }
 
+    /***
+     * AÑade un callback de exception
+     * @param $callback
+     */
     public function addExceptionCallBack($callback)
     {
         array_push($this->exceptionsCallbacks,$callback);
     }
 
 
+    /**
+     * Obtiene el callback de excepcion que se mostrara
+     * @param $request
+     * @param \Exception $exception
+     * @return mixed
+     */
     public function getCallBack($request, \Exception $exception)
     {
         foreach ($this->exceptionsCallbacks as $callback){
             if(is_callable($callback)){
-                return call_user_func($callback,$request,$exception);
+                $data = call_user_func($callback,$request,$exception);
+                if(!is_null($data)){
+                    return $data;
+                }
             }
+
         }
     }
 

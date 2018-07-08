@@ -64,24 +64,46 @@ class ExceptionProyect extends \Exception
         return $this->debugCode;
     }
 
+    /**
+     * Añade errores
+     * @param $errors
+     */
     public function setErrors($errors)
     {
         $this->allErrors = $errors;
     }
+
+    /**
+     * Obtiene el listado de errores
+     * @return mixed
+     */
     public function getErrors()
     {
         return $this->allErrors;
     }
 
+    /**
+     * Obtiene el codigo de http que tendra la solicitud
+     * @return int
+     */
     public function getHttpCode()
     {
         return $this->httpCode;
     }
 
+    /**
+     * @param int $httpCode
+     */
+
     public function setHttpCode(int $httpCode)
     {
         $this->httpCode = $httpCode;
     }
+
+    /**
+     * convierte el Objeto en un array
+     * @return array
+     */
 
     public function toArray()
     {
@@ -97,6 +119,7 @@ class ExceptionProyect extends \Exception
     {
         return json_encode($this->toArray());
     }
+
 
     public function toJsonObject()
     {

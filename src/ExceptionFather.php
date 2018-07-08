@@ -117,6 +117,10 @@ class ExceptionFather
         return $this;
     }
 
+
+    /**
+     * @return null
+     */
     private function getDetails()
     {
         if($this->showDetails){
@@ -125,11 +129,19 @@ class ExceptionFather
         return  null;
     }
 
+    /**
+     * @return $this
+     */
+
     public function withLog()
     {
         $this->log = true;
         return $this;
     }
+
+    /**
+     * @return $this
+     */
 
     public function showDetails()
     {
@@ -143,6 +155,9 @@ class ExceptionFather
         return $this;
     }
 
+    /**
+     * @return null
+     */
     private function getErrors()
     {
         if($this->showErrors){
@@ -199,6 +214,20 @@ class ExceptionFather
         return false;
     }
 
+
+    /**
+     * Setea cual es la exception
+     * @param $exception
+     */
+    private function setException($exception)
+    {
+        $this->exception = $exception;
+    }
+
+
+    /**
+     * Se encarga de construir el objeto de la excepcion
+     */
     private function buildException()
     {
         if($this->isJsonRequest()){
@@ -212,13 +241,10 @@ class ExceptionFather
     }
 
 
-
-    private function setException($exception)
-    {
-        $this->exception = $exception;
-    }
-
-
+    /**
+     * Devuelve la excepcion que se va utilizar
+     * @return ExceptionProyect
+     */
     private function getException(): ExceptionProyect
     {
         return $this->exception;
