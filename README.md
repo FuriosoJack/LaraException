@@ -149,7 +149,6 @@ Lanza un excepcion con detalles y con debug code perzonalizado y un log y muestr
 ```
 
 
-
 En el siguiente ejemplo corresonde a la forma de enviar los errores en un array, solo funciona cuando la peticion tiene el header `Accept: applitacion/json`
 
  ```php
@@ -165,6 +164,7 @@ En el siguiente ejemplo corresonde a la forma de enviar los errores en un array,
   ->build();
 
 ```
+
 
 
 Se puede hace varias combinaciones de los metodos ya que estan encadenados pero obiamente 
@@ -199,3 +199,8 @@ Ejemplo de logs
 
 
 
+##Excepciones Personalizadas
+
+Si usted en su paquete va a utilizar LaraException y puede que el proyecto que use su paquete tambien utilice LaraException y quiere que se ejecute algo o se haga algo diferente en casos especificos, con el MasterManager que tiene LaraException usted puede añadir esos filtro.
+
+####Ejemplo
