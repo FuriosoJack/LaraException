@@ -11,6 +11,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use FuriosoJack\LaraException\ExceptionFather;
 
+
+
 /**
  * Description of LaraExceptionServiceProvider
  *
@@ -55,7 +57,7 @@ class LaraExceptionServiceProvider extends ServiceProvider
 
         $publishable = [
             self::TAGS_PUBLISHED['config.lara_exception'] => [
-                path_laraException('Config/LaraException.php')=> config_path('LaraException.php')
+                __DIR__.'/../Config/LaraException.php' => config_path('LaraException.php')
             ]
         ];
 

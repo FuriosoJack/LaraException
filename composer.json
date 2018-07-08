@@ -35,11 +35,6 @@
           "LaraException":  "FuriosoJack\\LaraException\\Facades\\LaraExceptionFacade"
         }
       }
-    },
-    "scripts" : {
-      "post-autoload-dump": [
-        "@php artisan vendor:publish"
-      ]
     }
 
 }
