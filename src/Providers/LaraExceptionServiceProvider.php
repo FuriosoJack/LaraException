@@ -45,6 +45,8 @@ class LaraExceptionServiceProvider extends ServiceProvider
            //return app(ExceptionFather::class,[$request]);
            return new ExceptionFather;
         });
+
+        $this->publishFiles();
     }
 
 
