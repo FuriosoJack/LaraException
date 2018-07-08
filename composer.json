@@ -19,13 +19,17 @@
 	"autoload": {
         "psr-4": {
             "FuriosoJack\\LaraException\\": "src"
-        }
+        },
+        "files": [
+          "src/Helpers/Basic.php"
+        ]
     },	
     "require": {
 		"php": ">= 7",
         "laravel/framework": "^5.6"
 
 	},
+
     "extra": {
       "laravel": {
         "providers": [

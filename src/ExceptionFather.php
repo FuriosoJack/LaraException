@@ -169,7 +169,7 @@ class ExceptionFather
      * Devuelve el patch de la vista que se va a mostrar en caso de excepcion http
      * @return \Illuminate\Config\Repository|mixed
      */
-    private function getVewPath()
+    protected function getVewPath()
     {
         return config('LaraException.'.$this->style . '.view' );
     }
@@ -178,7 +178,7 @@ class ExceptionFather
      * Devuelve la configuracion de la redirecion
      * @return \Illuminate\Config\Repository|mixed
      */
-    public function getRedirect()
+    protected function getRedirect()
     {
         return config('LaraException.'.$this->style . '.redirect' );
     }
