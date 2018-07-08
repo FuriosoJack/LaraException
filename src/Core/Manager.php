@@ -37,7 +37,7 @@ class Manager
     {
         foreach ($this->exceptionsCallbacks as $callback){
             if(is_callable($callback)){
-                return call_user_func($callback,[$request,$exception]);
+                return call_user_func($callback,$request,$exception);
             }
         }
     }
