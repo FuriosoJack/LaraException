@@ -199,8 +199,8 @@ Ejemplo de logs
 
 
 
-##Excepciones Personalizadas
+## Excepciones Personalizadas
 
 Si usted en su paquete va a utilizar LaraException y puede que el proyecto que use su paquete tambien utilice LaraException y quiere que se ejecute algo o se haga algo diferente en casos especificos, con el MasterManager que tiene LaraException usted puede añadir esos filtro.
 
-####Ejemplo
+#### Ejemplo
