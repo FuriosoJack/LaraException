@@ -27,3 +27,16 @@ if(!function_exists('lara_exception')){
         return $lara;
     }
 }
+
+
+if(!function_exists('lara_exception_masterManager')){
+    /**
+     * Devuleve la ruta completa de la ubicacion del paquete
+     * @param string $path
+     * @return string
+     */
+    function lara_exception_masterManager(): FuriosoJack\LaraException\Core\Manager
+    {
+        return app()->make('LaraExceptionMasterManger');
+    }
+}

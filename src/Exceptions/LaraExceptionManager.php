@@ -38,8 +38,8 @@ class LaraExceptionManager extends Handler
             return $exception->renderException();
         }*/
 
-        $masterManager = app()->make('LaraExceptionMangerE');
-        $callback = $masterManager->getCallBack();
+        $masterManager = lara_exception_masterManager();
+        $callback = $masterManager->getCallBack($request,$exception);
         dd($callback);
         if($callback){
             return $callback;
