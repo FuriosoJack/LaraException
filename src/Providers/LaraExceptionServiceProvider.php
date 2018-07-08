@@ -55,6 +55,7 @@ class LaraExceptionServiceProvider extends ServiceProvider
         $this->app->singleton('LaraExceptionMangerE',function(){
            return new Manager();
         });
+
     }
 
 

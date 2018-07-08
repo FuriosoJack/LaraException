@@ -33,10 +33,10 @@ class LaraExceptionManager extends Handler
 
     public function render($request, Exception $exception)
     {
-        //Se valida si la exepcion este este paquete para renderizarla de la forma que se quiere
+      /*  //Se valida si la exepcion este este paquete para renderizarla de la forma que se quiere
         if($exception instanceof ExceptionProyect){
             return $exception->renderException();
-        }
+        }*/
 
         $masterManager = app()->make('LaraExceptionMangerE');
         $callback = $masterManager->getCallBack();
