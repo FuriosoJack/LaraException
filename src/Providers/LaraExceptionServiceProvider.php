@@ -55,7 +55,7 @@ class LaraExceptionServiceProvider extends ServiceProvider
 
         $publishable = [
             self::TAGS_PUBLISHED['config.lara_exception'] => [
-                __DIR__ . '/Confi/LaraException.php' => config_path('LaraException.php')
+                __DIR__ . '/Config/LaraException.php' => config_path('LaraException.php')
             ]
         ];
 
