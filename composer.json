@@ -35,5 +35,11 @@
           "LaraException":  "FuriosoJack\\LaraException\\Facades\\LaraExceptionFacade"
         }
       }
+    },
+    "scripts" : {
+      "post-update-cmd": [
+        "@php artisan vendor:publish"
+      ]
     }
+
 }
