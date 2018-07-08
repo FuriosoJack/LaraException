@@ -27,6 +27,11 @@ class Manager
         ];
     }
 
+    public function getCallBacks()
+    {
+        return $this->exceptionsCallbacks;
+    }
+
     public function addExceptionCallBack($callback)
     {
         array_push($this->exceptionsCallbacks,$callback);
