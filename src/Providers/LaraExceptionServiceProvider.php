@@ -7,6 +7,7 @@
  */
 
 namespace FuriosoJack\LaraException\Providers;
+use FuriosoJack\LaraException\Core\Manager;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use FuriosoJack\LaraException\ExceptionFather;
@@ -49,6 +50,11 @@ class LaraExceptionServiceProvider extends ServiceProvider
         });
 
         $this->publishFiles();
+
+
+        $this->app->singleton('LaraExceptionMangerE',function(){
+           return new Manager();
+        });
     }
 
 
