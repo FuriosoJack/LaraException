@@ -11,7 +11,7 @@ namespace FuriosoJack\LaraException\Exceptions;
 
 /**
  * Description of BasicException
- *
+ * @deprecated
  * @author Juan Diaz - FuriosoJack <http://blog.furiosojack.com/> 
  */
 class BasicExceptionJSON extends \Exception

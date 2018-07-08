@@ -17,10 +17,49 @@ use FuriosoJack\LaraException\Interfaces\RenderException;
 class ExceptionView extends ExceptionProyect implements RenderException
 {
 
+    private $redirect_page;
+
+    private $view_path;
+
+
+    public function setViewPath($viewPath)
+    {
+        $this->view_path = $viewPath;
+    }
+
+
+    public function setRedirectPath($redirect)
+    {
+        $this->redirect_page = $redirect;
+
+    }
+
+    protected function getVewPath()
+    {
+        return $this->view_path;
+    }
+
+    protected function getRedirect()
+    {
+        return $this->redirect_page;
+    }
+
+    /**
+     *
+     */
+    public function disableRedirectPage()
+    {
+        $this->redirect_page = false;
+    }
+
     public function renderException()
     {
 
-        return response()->laraException('laraException',$this->toArray());
+        if($this->getRedirect()){
+            return response()->laraException('laraException',$this->toArray(),$this->getVewPath());
+        }
+        return response()->view($this->getVewPath());
+
     }
 
 }

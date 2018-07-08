@@ -28,7 +28,10 @@ class ExceptionFather
     private $errors;
     private $exception;
     private $showErrors;
+    private $style;
+    private $redirect;
 
+    const STYLE_DEFUALT = "default";
 
 
     public function __construct()
@@ -37,6 +40,8 @@ class ExceptionFather
         $this->showDetails = false;
         $this->showErrors = false;
         $this->message = "LARAEXCEPTION";
+        $this->style = self::STYLE_DEFUALT;
+        $this->redirect = true;
     }
 
     /**
@@ -148,6 +153,41 @@ class ExceptionFather
 
 
     /**
+     * Asigna un estilo de vista para la exception
+     * APica solo cuando la exception se ejecuta en http
+     * @param string $style
+     */
+    public function style($style = self::STYLE_DEFUALT)
+    {
+        $this->style = $style;
+        return $this;
+    }
+
+    /**
+     * Hace que no se redireccione cuando se ejecute la excepcion
+     */
+    public function noRedirect()
+    {
+        $this->redirect = false;
+    }
+
+    /**
+     *
+     * Devuelve el patch de la vista que se va a mostrar en caso de excepcion http
+     * @return \Illuminate\Config\Repository|mixed
+     */
+    private function getVewPath()
+    {
+        return config('LaraException.'.$this->style . '.view' );
+
+    }
+
+
+
+
+
+
+    /**
      * Valida si en los headers existe el application/json
      * @return bool
      */
@@ -165,7 +205,11 @@ class ExceptionFather
         if($this->isJsonRequest()){
             $this->setException(new ExceptionJson($this->message,$this->debugCode,$this->details,$this->errors));
         }else{
-            $this->setException(new ExceptionView($this->message,$this->debugCode,$this->details,$this->errors));
+
+            $exception = new ExceptionView($this->message,$this->debugCode,$this->details,$this->errors);
+            $exception->setViewPath($this->getVewPath());
+            $exception-
+            $this->setException($exception);
         }
     }
 
@@ -211,11 +255,13 @@ class ExceptionFather
         if(!$this->showErrors){
             $this->getException()->setErrors(null);
         }
+
         $this->getException()->setHttpCode($httpCode);
 
         if($this->log){
             $this->renderLog();
         }
+
         throw $this->getException();
     }
 

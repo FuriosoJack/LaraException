@@ -12,7 +12,7 @@ Response::macro('laraException',function(callable $callback){
     //return response()->json(['fg']);
     return call_user_func($callback);
 });*/
-Response::macro('laraException',function(string $route, array $data){
+Response::macro('laraException',function(string $route, array $data, $viewPath){
     //return response()->json(['fg']);
     //return redirect()->action('\FuriosoJack\LaraException\Controllers\BasicController@laraException',['base64' => base64_encode(json_encode($data))]);
     /* session()->push('base64',base64_encode(json_encode($data)));
