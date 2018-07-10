@@ -49,6 +49,7 @@ class Manager
 
     /**
      * Obtiene el callback de excepcion que se mostrara
+     * Entonces Se obtiene el pimer callback que cumpla con que retorne algo
      * @param $request
      * @param \Exception $exception
      * @return mixed

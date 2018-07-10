@@ -17,27 +17,49 @@ use FuriosoJack\LaraException\Interfaces\RenderException;
 class ExceptionView extends ExceptionProyect implements RenderException
 {
 
+    /**
+     * Si o no se redireccionara la pagina
+     * @var Bool
+     */
     private $redirect_page;
 
+    /**
+     * Vista de blade que se mostrara
+     * @var string
+     */
     private $view_path;
 
 
+    /**
+     *
+     * @param $viewPath
+     */
     public function setViewPath($viewPath)
     {
         $this->view_path = $viewPath;
     }
 
 
-    public function setRedirectPath($redirect)
+    /**
+     * Establece si se redirecciona o no la pagina
+     * @param $redirect
+     */
+    public function setRedirectPath(bool $redirect = true)
     {
         $this->redirect_page = $redirect;
-
     }
 
+    /**
+     * @return string
+     */
     protected function getVewPath()
     {
         return $this->view_path;
     }
+
+    /**
+     * @return bool
+     */
 
     protected function getRedirect()
     {
@@ -45,7 +67,7 @@ class ExceptionView extends ExceptionProyect implements RenderException
     }
 
     /**
-     *
+     * Disactiva la redicion
      */
     public function disableRedirectPage()
     {
@@ -55,6 +77,8 @@ class ExceptionView extends ExceptionProyect implements RenderException
     public function renderException()
     {
         if($this->getRedirect()){
+
+            //como se va a retornar se utiliza el macro
             $errors = $this->toArray();
 
             $data = [
@@ -64,6 +88,8 @@ class ExceptionView extends ExceptionProyect implements RenderException
 
             return response()->laraException('laraException',$data);
         }
+
+        //Como no se va a redireccionar simplemente se responde con la vista
         return response()->view($this->getVewPath(),$this->toArray(),$this->getHttpCode());
 
     }

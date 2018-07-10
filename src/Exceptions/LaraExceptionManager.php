@@ -38,7 +38,10 @@ class LaraExceptionManager extends Handler
      */
     public function render($request, Exception $exception)
     {
+        //Se obtiene el singleton
         $masterManager = lara_exception_masterManager();
+
+        //Obtiene el primer calback que cumpla con la excepcion
         $callback = $masterManager->getCallBack($request,$exception);
         if(!is_null($callback)){
             return $callback;
