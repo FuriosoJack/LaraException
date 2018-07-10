@@ -316,7 +316,7 @@ al ser verdadero lo que hago es lanzar una excepcion de LaraExcepcion con su hel
 Sin embargo esto solo es una de las miles de cosas que se podrian hacer con un poco de imaginacion. :smirk: :smirk: :smirk: :muscle:
 
 
-#FIN
+# FIN
 
 
 
