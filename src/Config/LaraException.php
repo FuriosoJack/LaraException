@@ -4,5 +4,4 @@ return [
       'view' => 'lara_exception::error',
       'redirect' => true
   ]
-
 ];

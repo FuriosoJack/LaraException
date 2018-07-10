@@ -78,7 +78,7 @@ quedando algo como esto:
 
 EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
-* **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
+* :ballot_box_with_check: **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
 
   
 * **debugCode(int)** - Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. **Siempre Visible**
@@ -94,7 +94,9 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
 * **showErros()** - Muestra los errores en la respuesta si no se especifican errores se mostrara como null
 
-* **errors([])** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showeErrors`
+* **errors([])** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showErrors`
+
+* **style(string)** Recibe un string, permite especificar un estilo visual que corresponde a el `key` que tiene que estar declarado en `config/LaraException`. [(Leer Seccion)](https://github.com/FuriosoJack/LaraException#estilo-visual(view)) 
 
 * **build(int = 200)** - *Este el utimo metodo que se debe llamar*. **Obligatorio** Este es el encargado de que la excepcion se lance, al metodo se le puede especificar el codigo `http de respuesta (HTTP STATUS CODE)`  por defecto si no se le especifica es `200`. 
 ## Ejemplos
@@ -170,6 +172,22 @@ En el siguiente ejemplo corresonde a la forma de enviar los errores en un array,
 Se puede hace varias combinaciones de los metodos ya que estan encadenados pero obiamente 
 teniendoen cuenta que el metodo `build()` siempre sea el ultimo.
 
+Tambien puede usar el helper en lugar de usar la fachada como se mosotro anteriormente, para usar el helper puede usar los mismos metodos ya mostrados, por ejemplo para relizar  
+
+El primer parametro que recibira esta funcion sera el mensaje
+ ```php
+  lara_exception("hola mundo")
+  ->debugCode(15)
+  ->details("Ya dije hola mundo?")
+  ->withLog()
+  ->errors([
+    "juan" => "nombre invalido",
+    "petro" => "nombre no existe"
+  ])
+  ->showDetails()
+  ->build();
+
+```
 
 
 ## Salidas
@@ -201,6 +219,46 @@ Ejemplo de logs
 
 ## Excepciones Personalizadas
 
-Si usted en su paquete va a utilizar LaraException y puede que el proyecto que use su paquete tambien utilice LaraException y quiere que se ejecute algo o se haga algo diferente en casos especificos, con el MasterManager que tiene LaraException usted puede añadir esos filtro.
 
-#### Ejemplo
+### Estilo Visual(view)
+
+***Solo es valido para excepciones que ocurran desde el navegador o que no sea una peticion JSON !!!!***
+
+Si usted necesita que su proyecto o paquete pueda tener un estilo unico de excepciones tanto de vista o tenga unas caracteristicas especiales.
+
+Es decir si por ejemplo usted esta programando un paquete para laravel y probablemente su paquete lo utilicen otras personas que tambien podrian estar utilizando LaraException y quiere que su paquete tenga un estilo visual(view) unico de excepciones.
+O si esta programando un proyecto en Laravel y necesita un estilo visual(view) diferente al por defecto.
+
+Para hacer eso posible es necesario que en la configuracion que tiene que estar en el proyecto en `config/LaraException.php`
+debe crear un estilo con el siguiente formato:
+
+```php
+  'blog' => [
+      'view' => 'blog.user.exceptions',
+      'redirect' => true
+  ]
+```
+
+Tenemos a **blog** como `key` queriendo decir que este estilo se llama blog, ahora dentro de este array
+existen dos claves la `view` que represanta la vista que se mostrara cuando ocurra una excepcion.
+
+La clave `redirect` representa si quiere que cuando ocurra una excepcion se redireccione a la url de LaraException (`/LaraException?errors=dsfdsfsdfsd`).
+
+**PD:**
+ 
+*Yo recomiendo dejarlo en `true` ya que esto permite que cuando un usuario haga una solicitud de tipo **POST** y se lance una exception esta se redireccion para que el usuario
+no pueda dar F5 o recargar la pagina y evitar nuevamente un error.*  
+   
+
+Como ya usted tiene un estilo definido puede usar el LaraException de la siguiente manera
+
+```php
+lara_exception("mensaje")
+->style('blog')
+->details('detalles de la excepcion')
+->build(500);
+```
+
+De esa forma cuando ocurra la excepcion la vista que se mostrara al usuario sera la que usted especifico en la configuracion.
+
+
