@@ -81,7 +81,7 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
 :ballot_box_with_check: **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
 
   
-* **debugCode(int)** - Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. **Siempre Visible**
+:black_circle: **debugCode(int)** -  Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. **Siempre Visible**
 
 
 * **details(string)** - Este metodo recibe un string que corresponse al de talle del error, generalmente creado para dar mas detalles al programador, por defecto no se le puestra al usuario pero si se muestra en el log **Visible u Oculto**.
