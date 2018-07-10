@@ -96,7 +96,7 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
 * **errors([])** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showErrors`
 
-* **style(string)** Recibe un string, permite especificar un estilo visual que corresponde a el `key` que tiene que estar declarado en `config/LaraException`. [(Leer Seccion)](#estilo-visual(view)) 
+* **style(string)** Recibe un string, permite especificar un estilo visual que corresponde a el `key` que tiene que estar declarado en `config/LaraException`. [(Leer Seccion)](#estilo-visualview) 
 
 * **build(int = 200)** - *Este el utimo metodo que se debe llamar*. **Obligatorio** :bangbang: Este es el encargado de que la excepcion se lance, al metodo se le puede especificar el codigo `http de respuesta (HTTP STATUS CODE)`  por defecto si no se le especifica es `200`. 
 ## Ejemplos
@@ -244,7 +244,7 @@ existen dos claves la `view` que represanta la vista que se mostrara cuando ocur
 
 La clave `redirect` representa si quiere que cuando ocurra una excepcion se redireccione a la url de LaraException (`/LaraException?errors=dsfdsfsdfsd`).
 
-**PD:**
+:pencil: **PD:**
  
 *Yo recomiendo dejarlo en `true` ya que esto permite que cuando un usuario haga una solicitud de tipo **POST** y se lance una exception esta se redireccion para que el usuario
 no pueda dar F5 o recargar la pagina y evitar nuevamente un error.*  
@@ -261,6 +261,4 @@ lara_exception("mensaje")
 
 De esa forma cuando ocurra la excepcion la vista que se mostrara al usuario sera la que usted especifico en la configuracion.
 
-SOnidos
-/play tada
 
