@@ -49,6 +49,10 @@ y en el mismo archivo mas abajo la siguiente alianza
   ],
 ```
 
+- [x] Finish my changes
+- [ ] Push my commits to GitHub
+- [ ] Open a pull request
+ 
 
 para finalizar en su archivo `app/Exceptions/Handler.php` es necesario incluir la clase `LaraExceptionManager` en este archivo. Se puede hacer de la siguiente forma.
 
