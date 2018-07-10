@@ -78,27 +78,27 @@ quedando algo como esto:
 
 EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
-:arrow_forward: **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
+* **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
 
   
-:arrow_forward: **debugCode(int)** -  Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. **Siempre Visible**
+* **debugCode(int)** -  Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. **Siempre Visible**
 
 
-:arrow_forward: **details(string)** - Este metodo recibe un string que corresponse al de talle del error, generalmente creado para dar mas detalles al programador, por defecto no se le puestra al usuario pero si se muestra en el log **Visible u Oculto**.
+* **details(string)** - Este metodo recibe un string que corresponse al de talle del error, generalmente creado para dar mas detalles al programador, por defecto no se le puestra al usuario pero si se muestra en el log **Visible u Oculto**.
 
 
-:arrow_forward: **withLog()** - Este metodo no recibe ningun parametros. Es usado para indicar que se quiere generar un log por dicha excepcion.
+* **withLog()** - Este metodo no recibe ningun parametros. Es usado para indicar que se quiere generar un log por dicha excepcion.
     Los logs quedan almacenados dependiendo de como se tenga configurado en el proyecto, un proyecto donde no se le haya modificado el lugar de los log estos se almacenaran en `storage/logs/laravel.log`, si se especifican detalles y errores siempre seran mostrado en el log.  
 
-:arrow_forward: **showDetails()** - Este metodo permite que se muestre los detalles a la excepcion que se le muestra al usuario ya sea por HTTP norml o por JSON.
+* **showDetails()** - Este metodo permite que se muestre los detalles a la excepcion que se le muestra al usuario ya sea por HTTP norml o por JSON.
 
-:arrow_forward: **showErros()** - Muestra los errores en la respuesta si no se especifican errores se mostrara como null
+* **showErros()** - Muestra los errores en la respuesta si no se especifican errores se mostrara como null
 
-:arrow_forward: **errors([])** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showErrors`
+* **errors([])** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showErrors`
 
-:arrow_forward: **style(string)** Recibe un string, permite especificar un estilo visual que corresponde a el `key` que tiene que estar declarado en `config/LaraException`. [(Leer Seccion)](https://github.com/FuriosoJack/LaraException#estilo-visual(view)) 
+* **style(string)** Recibe un string, permite especificar un estilo visual que corresponde a el `key` que tiene que estar declarado en `config/LaraException`. [(Leer Seccion)](#estilo-visual(view)) 
 
-:arrow_forward: **build(int = 200)** - *Este el utimo metodo que se debe llamar*. **Obligatorio** :bangbang:  Este es el encargado de que la excepcion se lance, al metodo se le puede especificar el codigo `http de respuesta (HTTP STATUS CODE)`  por defecto si no se le especifica es `200`. 
+* **build(int = 200)** - *Este el utimo metodo que se debe llamar*. **Obligatorio** :bangbang: Este es el encargado de que la excepcion se lance, al metodo se le puede especificar el codigo `http de respuesta (HTTP STATUS CODE)`  por defecto si no se le especifica es `200`. 
 ## Ejemplos
 
 
