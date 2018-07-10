@@ -31,7 +31,8 @@ o añadiendo directamente el el archivo `composer.json`
     }
 }
 ```
-
+**Si usted tiene una version de Laravel `< 5.6` debe hacer lo siguiente** :arrow_down: :arrow_down:
+ 
 Luego en el archivo `config/app.php` incluir el siguiente service provider
 
 ```php
