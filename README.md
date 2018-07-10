@@ -50,7 +50,9 @@ y en el mismo archivo mas abajo la siguiente alianza
     'LaraException' => FuriosoJack\LaraException\Facades\LaraExceptionFacade::class,
   ],
 ```
+
 **Si usted tiene una version de Laravel `< 5.6` debe hacer lo siguiente** :arrow_up: :arrow_up:
+
 ---
  
 
