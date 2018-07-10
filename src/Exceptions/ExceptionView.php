@@ -76,10 +76,10 @@ class ExceptionView extends ExceptionProyect implements RenderException
 
     public function renderException()
     {
+        $errors = $this->toArray();
         if($this->getRedirect()){
 
             //como se va a retornar se utiliza el macro
-            $errors = $this->toArray();
 
             $data = [
                 'errors' => $errors,
@@ -90,7 +90,7 @@ class ExceptionView extends ExceptionProyect implements RenderException
         }
 
         //Como no se va a redireccionar simplemente se responde con la vista
-        return response()->view($this->getVewPath(),$this->toArray(),$this->getHttpCode());
+        return response()->view($this->getVewPath(),$errors,$this->getHttpCode());
 
     }
 

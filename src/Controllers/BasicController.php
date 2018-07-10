@@ -47,12 +47,11 @@ class BasicController extends Controller
         $errors =[];
         if(is_null($info)){
             $errors  = [
-                'details' => false,
-                'error' => 'LaraException',
+                'details' => '',
+                'message' => 'LaraException',
                 'debugCode' => '0',
                 'errors' => []
             ];
-
         }else{
             //$urlEncode = \Crypt::decrypt($info);
             //\Cookie::forget('lara_exception_code');
@@ -63,7 +62,6 @@ class BasicController extends Controller
             $errors = $data['errors'];
             $view = $data['view'];
         }
-        $errors['routeBack'] = redirect()->back()->getTargetUrl();
         return view($view,$errors);
     }
 

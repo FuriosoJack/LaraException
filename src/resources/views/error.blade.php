@@ -66,7 +66,7 @@
     <div class="col-md-8">
         <h1>Error <strong>{{$debugCode}}</strong></h1>
 
-        <h2><strong>{{$error}}</strong></h2>
+        <h2><strong>{{$message}}</strong></h2>
         <div class="container cen">
             <p><i>{{$details}}</i></p>
         </div>

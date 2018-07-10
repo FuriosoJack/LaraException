@@ -285,10 +285,11 @@ De esa forma cuando ocurra la excepcion la vista que se mostrara al usuario sera
 Para crear una vista compatible con LaraExeption la vista tiene que ser blade.
 Las variables a las que tendra acceso en su vista seran las siguientes:
 
-* error
-* errors
-* debugCode
-* details
+* **$message**
+* **$errors** 
+* **$debugCode**
+* **$details**
+* **$routeBack** : Es la url de la ruta anterior
 
 
 

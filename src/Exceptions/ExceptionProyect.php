@@ -108,10 +108,11 @@ class ExceptionProyect extends \Exception
     public function toArray()
     {
         return [
-            'error' => $this->getMessageException(),
+            'message' => $this->getMessageException(),
             'errors' => $this->getErrors(),
             'debugCode' => $this->getDebugCode(),
-            'details' => $this->getDetails()
+            'details' => $this->getDetails(),
+            'routeBack' => redirect()->back()->getTargetUrl()
         ];
     }
 
