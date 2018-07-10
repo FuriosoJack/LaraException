@@ -278,7 +278,7 @@ lara_exception("mensaje")
 De esa forma cuando ocurra la excepcion la vista que se mostrara al usuario sera la que usted especifico en la configuracion.
 
 
-## Caputara de otras excepciones
+## Captuara de otras excepciones y reglas :scream_cat:
 
 Suele suceder que se su proyecto tenga otro tipo de excepciones que no son precisamente lanzadas por LaraException.
 
@@ -315,6 +315,8 @@ al ser verdadero lo que hago es lanzar una excepcion de LaraExcepcion con su hel
 
 Sin embargo esto solo es una de las miles de cosas que se podrian hacer con un poco de imaginacion. :smirk: :smirk: :smirk: :muscle:
 
+
+#FIN
 
 
 
