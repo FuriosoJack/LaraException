@@ -78,7 +78,7 @@ quedando algo como esto:
 
 EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
-:white_check_mark: **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
+:arrow_forward: **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
 
   
 :black_circle: **debugCode(int)** -  Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. **Siempre Visible**
