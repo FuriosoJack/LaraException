@@ -50,7 +50,8 @@ class BasicController extends Controller
                 'details' => '',
                 'message' => 'LaraException',
                 'debugCode' => '0',
-                'errors' => []
+                'errors' => [],
+                'routeBack' => ''
             ];
         }else{
             //$urlEncode = \Crypt::decrypt($info);
