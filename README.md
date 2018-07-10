@@ -261,4 +261,6 @@ lara_exception("mensaje")
 
 De esa forma cuando ocurra la excepcion la vista que se mostrara al usuario sera la que usted especifico en la configuracion.
 
+SOnidos
+/play tada
 
