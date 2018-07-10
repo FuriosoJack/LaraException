@@ -278,6 +278,22 @@ lara_exception("mensaje")
 De esa forma cuando ocurra la excepcion la vista que se mostrara al usuario sera la que usted especifico en la configuracion.
 
 
+#### Nueva vista
+
+*Si quire crear una nueva vista es por que tiene un nuevo estilo de excepcion, pero si lo que quiere es no especificar cada vez que lanza un LaraExcepcion el estilo pero con una vista diferente a la por defecto le recomendamos que lea la siguiente seccion.*
+
+Para crear una vista compatible con LaraExeption la vista tiene que ser blade.
+Las variables a las que tendra acceso en su vista seran las siguientes:
+
+* error
+* errors
+* debugCode
+* details
+
+
+
+#### Editar Default
+
 ## Captuara de otras excepciones y reglas :scream_cat:
 
 Suele suceder que se su proyecto tenga otro tipo de excepciones que no son precisamente lanzadas por LaraException.
@@ -301,7 +317,7 @@ registrar en el metodo  `register` de  `App\Providers\AppServiceProvider` si est
                     lara_exception("Not Fount")->style('blog')->build(404);
                 }
             }
-        })
+        });
 ```
 
 Con la ayuda del metodo `addExceptionCallBack` del MasterManager de LaraException usted puede indicar una funcion que contendra un logica que usted necesite
