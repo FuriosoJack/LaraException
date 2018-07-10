@@ -56,8 +56,9 @@ y en el mismo archivo mas abajo la siguiente alianza
 ---
  
 
-para finalizar en su archivo `app/Exceptions/Handler.php` es necesario incluir la clase `LaraExceptionManager` en este archivo. Se puede hacer de la siguiente forma.
+para finalizar en su archivo `app/Exceptions/Handler.php` es necesario incluir la clase `LaraExceptionManager` en ese archivo. Se puede hacer de la siguiente forma.
 
+Iportar la clase 
  
  ```php
  use FuriosoJack\LaraException\Exceptions\LaraExceptionManager;
@@ -85,13 +86,14 @@ quedando algo como esto:
 
 EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
-* **message(string)** - Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion **Obligatorio** **Siempre Visible**
+* **message(`string`)** - **Obligatorio** :bangbang: Este metodo recibe string que seria el mensaje que se va a mostrar en la excepcion   
+:triangular_ruler: *Siempre Visible*
 
   
-* **debugCode(int)** -  Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. **Siempre Visible**
+* **debugCode(`int`)** -  Este metodo recibe un entero correpondiente al codigo de error de la excepcion (Util cuando se parametriza los errores). Si no se especifica el codigo de error por defecto sera 0. :triangular_ruler: *Siempre Visible*
 
 
-* **details(string)** - Este metodo recibe un string que corresponse al de talle del error, generalmente creado para dar mas detalles al programador, por defecto no se le puestra al usuario pero si se muestra en el log **Visible u Oculto**.
+* **details(`string`)** - Este metodo recibe un string que corresponse al de talle del error, generalmente creado para dar mas detalles al programador, por defecto no se le puestra al usuario pero si se muestra en el log. :triangular_ruler: *Visible u Oculto*
 
 
 * **withLog()** - Este metodo no recibe ningun parametros. Es usado para indicar que se quiere generar un log por dicha excepcion.
@@ -101,11 +103,12 @@ EL paquete provee unos parametros para ser la excepcion mas personalizada.
 
 * **showErros()** - Muestra los errores en la respuesta si no se especifican errores se mostrara como null
 
-* **errors([])** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showErrors`
+* **errors(`array`)** Recibe un array de los errores que se quieran ajuntas mas al error principal, estos errores solo son mostrados al usuario si se usan en conjunto con `showErrors`
 
-* **style(string)** Recibe un string, permite especificar un estilo visual que corresponde a el `key` que tiene que estar declarado en `config/LaraException`. [(Leer Seccion)](#estilo-visualview) 
+* **style(`string`)** Recibe un string, permite especificar un estilo visual que corresponde a el `key` que tiene que estar declarado en `config/LaraException`. [(Leer Seccion)](#estilo-visualview) 
 
-* **build(int = 200)** - *Este el utimo metodo que se debe llamar*. **Obligatorio** :bangbang: Este es el encargado de que la excepcion se lance, al metodo se le puede especificar el codigo `http de respuesta (HTTP STATUS CODE)`  por defecto si no se le especifica es `200`. 
+* **build(`int = 200`)** - *Este el utimo metodo que se debe llamar*. **Obligatorio** :bangbang: Este es el encargado de que la excepcion se lance, al metodo se le puede especificar el codigo `http de respuesta (HTTP STATUS CODE)`  por defecto si no se le especifica es `200`.
+ 
 ## Ejemplos
 
 
