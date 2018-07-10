@@ -56,7 +56,7 @@ y en el mismo archivo mas abajo la siguiente alianza
 ---
  
 
-para finalizar en su archivo `app/Exceptions/Handler.php` es necesario incluir la clase `LaraExceptionManager` en ese archivo. Se puede hacer de la siguiente forma.
+En su archivo `app/Exceptions/Handler.php` es necesario incluir la clase `LaraExceptionManager` en ese archivo. Se puede hacer de la siguiente forma.
 
 Iportar la clase 
  
@@ -79,6 +79,12 @@ quedando algo como esto:
     {
         
     
+```
+
+Para finalizar debe pulicar la configuracion para ello en su consola debe ejecutar el comando.
+
+```bash
+ $ php artisan vendor:publish --tag=config.lara_exception
 ```
 
 
@@ -270,5 +276,46 @@ lara_exception("mensaje")
 ```
 
 De esa forma cuando ocurra la excepcion la vista que se mostrara al usuario sera la que usted especifico en la configuracion.
+
+
+## Caputara de otras excepciones
+
+Suele suceder que se su proyecto tenga otro tipo de excepciones que no son precisamente lanzadas por LaraException.
+
+Por ejemplo al entrar a una ruta que no existe se lanzara la excepcion `NotFoundHttpException` la cual por defecto Laravel mostrara 
+una vista con el error "*Sorry, the page you are looking for could not be found.*".
+
+Si usted lo desea puede hacer que LaraExcepcion tambien se encargue de este tipo de excepciones y retorne una vista que usted quiera o que 
+simplemente ahora se lanzes una excepcion de LaraExcepcion, usted debe hacer lo siguiente:
+
+Para el ejemplo se quiere que cuando se lance una excepcion de `NotFoundHttpException` y que ademas si en la url tiene el texto *blog* se ejecute es por una excepcion de LaraExcepcion.
+
+Entonces para ello es necesario añadir en un servis provider; en el caso de estar trabajando en un proyecto se deberia 
+registrar en el metodo  `register` de  `App\Providers\AppServiceProvider` si esta trabajando es en un paquete de laravel añadlo en el metodo register de su service provider.
+
+
+```php 
+        lara_exception_masterManager()->addExceptionCallBack(function($request, \Exception $exception){
+            if(strpos($request->getPathInfo(),"/blog") !== FALSE){
+                if($exception instanceof NotFoundHttpException){
+                    lara_exception("Not Fount")->style('blog')->build(404);
+                }
+            }
+        })
+```
+
+Con la ayuda del metodo `addExceptionCallBack` del MasterManager de LaraException usted puede indicar una funcion que contendra un logica que usted necesite
+pero que para el ejemplo es ejecutar una excepcion de LaraException cuando se lanaza una `NotFoundHttpException` y que ademas tenga en su url el texto `blog`
+
+El la funcion que se añade recibe dos parametros, el `$request` que es el objeto de la solicitud y el parametro `$exception` que es la excepcion que se lanzo. 
+
+Siguiendo con el ejemplo verifico si en e la url esta la palabra blog url que se obtiene por medio del metodo `getPathInfo` que tiene el $request,
+al ser verdadero lo que hago es lanzar una excepcion de LaraExcepcion con su helper y adicionalmente indicando el estilo que quiero y finalizando con el codigo de error que quiero que entregue. 
+:scream_cat: :scream_cat: :scream_cat: :scream_cat:
+
+Sin embargo esto solo es una de las miles de cosas que se podrian hacer con un poco de imaginacion. :smirk: :smirk: :smirk: :muscle:
+
+
+
 
 
