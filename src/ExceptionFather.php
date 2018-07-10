@@ -45,34 +45,6 @@ class ExceptionFather
     }
 
     /**
-     *
-     * Se encarga de generar la excepcion
-     * @param string $message
-     * @param int $httpCode
-     * @param bool $status
-     * @param bool $log
-     * @deprecated Ya nosera usado ya que ahora se implementa un creador
-     * de excepciones que detecta si la peticion es formato json o http y sera usado solo el metodo build
-     * @throws Exceptions\BasicExceptionJSON
-     */
-    public function buildEJson(string $message = "", bool $log = true)
-    {
-
-        $this->message = $message;
-        if($log)
-        {
-            $this->renderLog();
-        }
-
-
-        throw new Exceptions\BasicExceptionJSON($message, 200);
-
-    }
-
-
-
-
-    /**
      * Llena el mensaje y retorna una instancia de el mismo
      * @param string $message
      * @return $this
@@ -109,7 +81,7 @@ class ExceptionFather
     /**
      * Llena
      * @param string $details
-     * @deprecated
+     *
      */
     public function details(string $details)
     {
