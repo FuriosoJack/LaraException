@@ -295,6 +295,15 @@ Las variables a las que tendra acceso en su vista seran las siguientes:
 
 #### Editar Default
 
+Para editar la vista por defecto es necesario publicala en su proyecto para ello ejecute en su consola lo siguiente
+
+```bash
+ $ php artisan vendor:publish --tag=views.lara_exception
+```
+
+de esa forma ahora tendra esta carpeta `resources\view\vendor\LaraException`, donde estara la vista llamada error.blade.php 
+la cual es la que usted personalizara.
+
 ## Captuara de otras excepciones y reglas :scream_cat:
 
 Suele suceder que se su proyecto tenga otro tipo de excepciones que no son precisamente lanzadas por LaraException.
