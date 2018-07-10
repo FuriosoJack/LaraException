@@ -301,7 +301,7 @@ Para editar la vista por defecto es necesario publicala en su proyecto para ello
  $ php artisan vendor:publish --tag=views.lara_exception
 ```
 
-de esa forma ahora tendra esta carpeta `resources\view\vendor\LaraException`, donde estara la vista llamada error.blade.php 
+de esa forma ahora tendra esta carpeta `resources\views\vendor\LaraException`, donde estara la vista llamada error.blade.php 
 la cual es la que usted personalizara.
 
 ## Captuara de otras excepciones y reglas :scream_cat:
