@@ -71,7 +71,7 @@ class LaraExceptionServiceProvider extends ServiceProvider
                 __DIR__.'/../Config/LaraException.php' => config_path('LaraException.php')
             ],
             self::TAGS_PUBLISHED['views'] => [
-                __DIR__.'/../resources/views/error.blade.php' => resource_path('views/vendor/LaraException'),
+                __DIR__.'/../resources/views' => resource_path('views/vendor/LaraException'),
             ],
         ];
 
