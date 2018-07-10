@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Storage;
 class BasicController extends Controller
 {
 
-    const VIEW_DEFAULT = "lara_exception::error";
+    const VIEW_DEFAULT = "LaraException::error";
     /**
      *  Controlador encargado de validar que debe retornar si la vista o el response JSON
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View

@@ -1,7 +1,7 @@
 <?php
 return [
   'default' => [
-      'view' => 'lara_exception::error',
+      'view' => \FuriosoJack\LaraException\Controllers\BasicController::VIEW_DEFAULT,
       'redirect' => true
   ]
 ];
