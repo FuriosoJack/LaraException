@@ -22,7 +22,9 @@ use FuriosoJack\LaraException\ExceptionFather;
 class LaraExceptionServiceProvider extends ServiceProvider
 {
 
-    const TAGS_PUBLISHED = ['config.lara_exception' => 'config.lara_exception'];
+    const TAGS_PUBLISHED = ['config.lara_exception' => 'config.lara_exception',
+                            'views' => 'views.lara_exception'];
+
 
     public function boot()
     {        //Registrar helpers
@@ -38,6 +40,7 @@ class LaraExceptionServiceProvider extends ServiceProvider
     {
         //Registra las rutas y macros         
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
+
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'lara_exception');
         
@@ -66,7 +69,10 @@ class LaraExceptionServiceProvider extends ServiceProvider
         $publishable = [
             self::TAGS_PUBLISHED['config.lara_exception'] => [
                 __DIR__.'/../Config/LaraException.php' => config_path('LaraException.php')
-            ]
+            ],
+            self::TAGS_PUBLISHED['views'] => [
+                __DIR__.'/../resources/views/error.blade.php' => resource_path('views/vendor/LaraException'),
+            ],
         ];
 
         foreach ($publishable as $tag => $path){
