@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Juan
- * Date: 21/02/2018
- * Time: 04:42 PM
- */
 
 namespace FuriosoJack\LaraException\Exceptions;
 
@@ -18,9 +12,7 @@ use Throwable;
 class ExceptionProyect extends \Exception
 {
 
-    private $messageException;
     private $details;
-    private $debugCode;
     private $allErrors;
     private $httpCode;
 
@@ -28,8 +20,9 @@ class ExceptionProyect extends \Exception
     public function __construct($messageException, $debugCode, $details, $erorrs, $httpCode = 200)
     {
 
-        $this->messageException = $messageException;
-        $this->debugCode = $debugCode;
+
+        $this->message = $messageException;
+        $this->code = $debugCode;
         $this->details = $details;
         $this->allErrors = $erorrs;
         $this->httpCode = $httpCode;
@@ -40,7 +33,7 @@ class ExceptionProyect extends \Exception
      */
     public function getMessageException(): string
     {
-        return $this->messageException;
+        return $this->message;
     }
 
     /**
@@ -61,7 +54,7 @@ class ExceptionProyect extends \Exception
      */
     public function getDebugCode()
     {
-        return $this->debugCode;
+        return $this->code;
     }
 
     /**
