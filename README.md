@@ -1,3 +1,6 @@
+[![Latest Stable Version](https://poser.pugx.org/furiosojack/lara-exception/v/stable)](https://packagist.org/packages/furiosojack/lara-exception)
+[![Total Downloads](https://poser.pugx.org/furiosojack/lara-exception/downloads)](https://packagist.org/packages/furiosojack/lara-exception)
+[![License](https://poser.pugx.org/furiosojack/lara-exception/license)](https://packagist.org/packages/furiosojack/lara-exception)
 # Español
 
 ## Licencia
