@@ -1,6 +1,12 @@
 [![Latest Stable Version](https://poser.pugx.org/furiosojack/lara-exception/v/stable)](https://packagist.org/packages/furiosojack/lara-exception)
 [![Total Downloads](https://poser.pugx.org/furiosojack/lara-exception/downloads)](https://packagist.org/packages/furiosojack/lara-exception)
 [![License](https://poser.pugx.org/furiosojack/lara-exception/license)](https://packagist.org/packages/furiosojack/lara-exception)
+
+[![GitHub forks](https://img.shields.io/github/forks/FuriosoJack/LaraException.svg)](https://github.com/FuriosoJack/LaraException/network)
+[![GitHub stars](https://img.shields.io/github/stars/FuriosoJack/LaraException.svg)](https://github.com/FuriosoJack/LaraException/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/FuriosoJack/LaraException.svg)](https://github.com/FuriosoJack/LaraException/issues)
+
+
 # Español
 
 ## Licencia
